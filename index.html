@@ -47,6 +47,8 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
         }
 
         #three-canvas {
@@ -89,6 +91,27 @@
             transform: translateY(0);
         }
 
+        /* --- Global HUD Brackets --- */
+        .hud-bracket {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-color: var(--primary);
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+        .hud-tl { top: 10px; left: 10px; border-top: 2px solid; border-left: 2px solid; }
+        .hud-tr { top: 10px; right: 10px; border-top: 2px solid; border-right: 2px solid; }
+        .hud-bl { bottom: 10px; left: 10px; border-bottom: 2px solid; border-left: 2px solid; }
+        .hud-br { bottom: 10px; right: 10px; border-bottom: 2px solid; border-right: 2px solid; }
+
+        .group:hover .hud-bracket {
+            opacity: 1;
+            scale: 1.1;
+            filter: drop-shadow(0 0 5px var(--primary));
+        }
+
+        /* --- Animation 1: Standard Logo Scan --- */
         .scan-bar {
             position: absolute;
             width: 100%;
@@ -98,6 +121,69 @@
             left: 0;
             opacity: 0.3;
             animation: scanning 6s linear infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* --- Animation 2: Binary Data Stream (About Section) --- */
+        .data-stream {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, transparent 0%, rgba(6, 182, 212, 0.05) 50%, transparent 100%);
+            background-size: 100% 200%;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .group:hover .data-stream {
+            opacity: 1;
+            animation: streaming 2s linear infinite;
+        }
+
+        /* --- Animation 3: Glitch Sync (Roadmap) --- */
+        .glitch-overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--primary);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .group:hover .glitch-overlay {
+            animation: glitch-flash 0.3s steps(2) infinite;
+        }
+
+        /* --- Animation 4: Inventory Laser Scan (Projects) --- */
+        .inventory-scan {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            top: -50%;
+            left: 0;
+            box-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .group:hover .inventory-scan {
+            opacity: 0.8;
+            animation: scanning-fast 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        /* --- Animation 5: Circuit Power (Workshop) --- */
+        .circuit-power {
+            position: absolute;
+            inset: 0;
+            border: 1px solid transparent;
+            transition: all 0.5s;
+            pointer-events: none;
+        }
+        .group:hover .circuit-power {
+            background: radial-gradient(circle at center, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+            border-color: rgba(6, 182, 212, 0.4);
+            box-shadow: inset 0 0 20px rgba(6, 182, 212, 0.2);
         }
 
         @keyframes scanning {
@@ -105,17 +191,21 @@
             100% { top: 110%; }
         }
 
-        .hud-bracket {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            border-color: var(--primary);
-            opacity: 0.3;
+        @keyframes streaming {
+            0% { background-position: 0% 200%; }
+            100% { background-position: 0% -200%; }
         }
-        .hud-tl { top: 10px; left: 10px; border-top: 2px solid; border-left: 2px solid; }
-        .hud-tr { top: 10px; right: 10px; border-top: 2px solid; border-right: 2px solid; }
-        .hud-bl { bottom: 10px; left: 10px; border-bottom: 2px solid; border-left: 2px solid; }
-        .hud-br { bottom: 10px; right: 10px; border-bottom: 2px solid; border-right: 2px solid; }
+
+        @keyframes scanning-fast {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
+
+        @keyframes glitch-flash {
+            0% { opacity: 0.05; transform: translateX(-2px); }
+            50% { opacity: 0; transform: translateX(2px); }
+            100% { opacity: 0.05; transform: translateY(-1px); }
+        }
 
         .stagger-card {
             max-width: 600px;
@@ -180,6 +270,20 @@
         }
         #mobile-menu.active {
             transform: translateX(0);
+        }
+
+        /* Tech Grid Glow */
+        .tech-grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(var(--primary) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+        .group:hover .tech-grid-overlay {
+            opacity: 0.05;
         }
     </style>
 </head>
@@ -292,7 +396,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About Section: DATA STREAM ANIMATION -->
     <section id="about" class="py-20 md:py-32 px-6 relative overflow-hidden">
         <div class="fixed-robotics-bg"></div>
         <div class="mechanical-overlay"></div>
@@ -304,7 +408,8 @@
             </div>
 
             <div class="flex flex-col gap-8 md:gap-12">
-                <div class="reveal stagger-card glass-panel p-6 md:p-10 rounded-2xl border-white/10 self-start">
+                <div class="reveal stagger-card group glass-panel p-6 md:p-10 rounded-2xl border-white/10 self-start">
+                    <div class="data-stream"></div>
                     <div class="hud-bracket hud-tl"></div><div class="hud-bracket hud-tr"></div>
                     <div class="hud-bracket hud-bl"></div><div class="hud-bracket hud-br"></div>
                     <h4 class="text-xl md:text-2xl font-black mb-4 md:mb-6 uppercase italic text-cyan-400">Introduction</h4>
@@ -313,7 +418,8 @@
                     </p>
                 </div>
 
-                <div class="reveal stagger-card glass-panel p-6 md:p-10 rounded-2xl border-cyan-500/30 self-end lg:mr-20" style="transition-delay: 0.2s">
+                <div class="reveal stagger-card group glass-panel p-6 md:p-10 rounded-2xl border-cyan-500/30 self-end lg:mr-20" style="transition-delay: 0.2s">
+                    <div class="data-stream"></div>
                     <div class="hud-bracket hud-tl opacity-100"></div><div class="hud-bracket hud-tr opacity-100"></div>
                     <div class="hud-bracket hud-bl opacity-100"></div><div class="hud-bracket hud-br opacity-100"></div>
                     <h4 class="text-xl md:text-2xl font-black mb-4 md:mb-6 uppercase italic text-white">What We Do?</h4>
@@ -325,7 +431,7 @@
         </div>
     </section>
 
-    <!-- Roadmap -->
+    <!-- Roadmap: GLITCH SYNC ANIMATION -->
     <section id="roadmap" class="py-20 md:py-32 px-6 bg-slate-950/20 border-y border-white/5">
         <div class="max-w-7xl mx-auto">
             <div class="mb-16 md:mb-24 reveal">
@@ -334,22 +440,26 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                <div class="reveal clip-tech glass-panel p-8 md:p-10 hover:border-cyan-500/50 transition-all group relative overflow-hidden">
+                <div class="reveal clip-tech group glass-panel p-8 md:p-10 hover:border-cyan-500/50 transition-all relative overflow-hidden">
+                    <div class="glitch-overlay"></div>
                     <span class="mono text-cyan-400 text-[10px] md:text-xs font-bold block mb-6 md:mb-8">STEP_01</span>
                     <h4 class="text-xl md:text-2xl font-black mb-4 uppercase tracking-tighter italic">Systems</h4>
                     <p class="text-xs md:text-sm text-slate-400 leading-relaxed font-medium">Deconstructing robot architecture and mechanical design ethics.</p>
                 </div>
-                <div class="reveal clip-tech glass-panel p-8 md:p-10 hover:border-cyan-500/50 transition-all group relative overflow-hidden" style="transition-delay: 0.1s">
+                <div class="reveal clip-tech group glass-panel p-8 md:p-10 hover:border-cyan-500/50 transition-all relative overflow-hidden" style="transition-delay: 0.1s">
+                    <div class="glitch-overlay"></div>
                     <span class="mono text-cyan-400 text-[10px] md:text-xs font-bold block mb-6 md:mb-8">STEP_02</span>
                     <h4 class="text-xl md:text-2xl font-black mb-4 uppercase tracking-tighter italic">Core Elex</h4>
                     <p class="text-xs md:text-sm text-slate-400 leading-relaxed font-medium">Interfacing motors, L298N drivers, and high-power circuit safety.</p>
                 </div>
-                <div class="reveal clip-tech glass-panel p-8 md:p-10 hover:border-cyan-500/50 transition-all group relative overflow-hidden" style="transition-delay: 0.2s">
+                <div class="reveal clip-tech group glass-panel p-8 md:p-10 hover:border-cyan-500/50 transition-all relative overflow-hidden" style="transition-delay: 0.2s">
+                    <div class="glitch-overlay"></div>
                     <span class="mono text-cyan-400 text-[10px] md:text-xs font-bold block mb-6 md:mb-8">STEP_03</span>
                     <h4 class="text-xl md:text-2xl font-black mb-4 uppercase tracking-tighter italic">Logic IDE</h4>
                     <p class="text-xs md:text-sm text-slate-400 leading-relaxed font-medium">Translating intent into C++ Arduino code for real-time action.</p>
                 </div>
-                <div class="reveal clip-tech bg-cyan-500 p-8 md:p-10 text-slate-950 transition-all relative overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.3)]" style="transition-delay: 0.3s">
+                <div class="reveal clip-tech bg-cyan-500 group p-8 md:p-10 text-slate-950 transition-all relative overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.3)]" style="transition-delay: 0.3s">
+                    <div class="inventory-scan !bg-slate-950/20"></div>
                     <span class="mono text-slate-900 text-[10px] md:text-xs font-black block mb-6 md:mb-8 uppercase">STEP_04: FINALE</span>
                     <h4 class="text-xl md:text-2xl font-black mb-4 uppercase tracking-tighter italic">Grand Build</h4>
                     <p class="text-xs md:text-sm font-bold leading-relaxed">Integrated deployment of a fully autonomous robotic prototype.</p>
@@ -358,7 +468,7 @@
         </div>
     </section>
 
-    <!-- Lab Inventory -->
+    <!-- Lab Inventory: LASER SCAN ANIMATION -->
     <section id="projects" class="py-20 md:py-32 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 md:mb-24 reveal">
@@ -369,7 +479,7 @@
         </div>
     </section>
 
-    <!-- Enrollment Section -->
+    <!-- Workshop: CIRCUIT POWER ANIMATION -->
     <section id="pricing" class="py-20 md:py-32 px-6 bg-slate-950/40 relative border-t border-white/5">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 md:mb-24 reveal">
@@ -379,7 +489,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                 <!-- Module 1 -->
-                <div class="reveal clip-tech glass-panel p-8 md:p-10 hover:border-cyan-500/50 transition-all flex flex-col relative">
+                <div class="reveal clip-tech group glass-panel p-8 md:p-10 hover:border-cyan-500/50 transition-all flex flex-col relative">
+                    <div class="circuit-power"></div>
                     <div class="hud-bracket hud-tl"></div><div class="hud-bracket hud-tr"></div>
                     <div class="hud-bracket hud-bl"></div><div class="hud-bracket hud-br"></div>
                     <h3 class="text-xl md:text-2xl font-black uppercase mb-2 italic">Robo-Aware</h3>
@@ -394,7 +505,8 @@
                 </div>
 
                 <!-- Module 2 -->
-                <div class="reveal clip-tech glass-panel p-8 md:p-10 transition-all flex flex-col relative bg-cyan-500/5 border-cyan-500 shadow-[0_0_60px_rgba(6,182,212,0.1)] md:scale-105 z-10" style="transition-delay: 0.1s">
+                <div class="reveal clip-tech group glass-panel p-8 md:p-10 transition-all flex flex-col relative bg-cyan-500/5 border-cyan-500 shadow-[0_0_60px_rgba(6,182,212,0.1)] md:scale-105 z-10" style="transition-delay: 0.1s">
+                    <div class="circuit-power"></div>
                     <div class="hud-bracket hud-tl opacity-100"></div><div class="hud-bracket hud-tr opacity-100"></div>
                     <div class="hud-bracket hud-bl opacity-100"></div><div class="hud-bracket hud-br opacity-100"></div>
                     <h3 class="text-xl md:text-2xl font-black uppercase mb-2 italic text-cyan-400">Fundamentals</h3>
@@ -410,7 +522,8 @@
                 </div>
 
                 <!-- Module 3 -->
-                <div class="reveal clip-tech glass-panel p-8 md:p-10 hover:border-cyan-500/50 transition-all flex flex-col relative" style="transition-delay: 0.2s">
+                <div class="reveal clip-tech group glass-panel p-8 md:p-10 hover:border-cyan-500/50 transition-all flex flex-col relative" style="transition-delay: 0.2s">
+                    <div class="circuit-power"></div>
                     <div class="hud-bracket hud-tl"></div><div class="hud-bracket hud-tr"></div>
                     <div class="hud-bracket hud-bl"></div><div class="hud-bracket hud-br"></div>
                     <h3 class="text-xl md:text-2xl font-black uppercase mb-2 italic">Hands-on Build</h3>
@@ -693,9 +806,19 @@
         const grid = document.getElementById('project-grid');
         pData.forEach((p, idx) => {
             const card = document.createElement('div');
-            card.className = 'reveal clip-tech glass-panel p-6 md:p-8 group cursor-pointer border-white/5 transition-all shadow-sm relative overflow-hidden';
+            card.className = 'reveal clip-tech group glass-panel p-6 md:p-8 cursor-pointer border-white/5 transition-all shadow-sm relative overflow-hidden';
             card.style.transitionDelay = `${idx * 0.05}s`;
-            card.innerHTML = `<div class="w-10 h-10 md:w-14 md:h-14 bg-slate-950 flex items-center justify-center mb-4 md:mb-6 border border-white/5 group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all"><i class="fas ${p.i} text-slate-600 group-hover:text-cyan-400 text-xl md:text-2xl transition-colors"></i></div><h4 class="font-black text-white text-[9px] md:text-[11px] leading-tight uppercase tracking-widest mb-2">${p.t}</h4><p class="mono text-[7px] md:text-[8px] text-slate-500 font-bold uppercase tracking-widest italic">Unit_${idx+1}</p>`;
+            card.innerHTML = `
+                <div class="tech-grid-overlay"></div>
+                <div class="inventory-scan"></div>
+                <div class="hud-bracket hud-tl"></div><div class="hud-bracket hud-tr"></div>
+                <div class="hud-bracket hud-bl"></div><div class="hud-bracket hud-br"></div>
+                <div class="w-10 h-10 md:w-14 md:h-14 bg-slate-950 flex items-center justify-center mb-4 md:mb-6 border border-white/5 group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all relative z-10">
+                    <i class="fas ${p.i} text-slate-600 group-hover:text-cyan-400 text-xl md:text-2xl transition-colors"></i>
+                </div>
+                <h4 class="font-black text-white text-[9px] md:text-[11px] leading-tight uppercase tracking-widest mb-2 relative z-10">${p.t}</h4>
+                <p class="mono text-[7px] md:text-[8px] text-slate-500 font-bold uppercase tracking-widest italic relative z-10">Unit_${idx+1}</p>
+            `;
             grid.appendChild(card);
         });
 
