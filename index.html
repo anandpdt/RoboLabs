@@ -26,6 +26,12 @@
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes lineFlow {
+            0% { transform: scaleX(0); opacity: 0; transform-origin: left; }
+            50% { transform: scaleX(1); opacity: 0.5; }
+            100% { transform: scaleX(0); opacity: 0; transform-origin: right; }
+        }
+
         body {
             background: linear-gradient(-45deg, #F8FAFC, #F1F5F9, #EFF6FF, #F8FAFC);
             background-size: 400% 400%;
@@ -57,6 +63,16 @@
 
         .font-mono {
             font-family: 'JetBrains Mono', monospace;
+        }
+
+        .section-divider {
+            height: 2px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            animation: lineFlow 6s infinite ease-in-out;
+            opacity: 0.2;
         }
 
         /* Glassmorphism Refined Cards */
@@ -112,16 +128,16 @@
             transition: all 0.3s ease;
         }
 
-        /* Form Glass Styling */
+        /* Form Visibility Improved */
         input, select, textarea {
-            background: rgba(255, 255, 255, 0.6) !important;
-            border: 1px solid rgba(255, 255, 255, 0.8) !important;
+            background: rgba(255, 255, 255, 0.9) !important;
+            border: 1.5px solid #CBD5E1 !important;
             backdrop-filter: blur(4px);
             color: var(--text-main) !important;
             transition: all 0.3s ease !important;
         }
         input:focus, select:focus, textarea:focus {
-            background: rgba(255, 255, 255, 0.9) !important;
+            background: #ffffff !important;
             border-color: var(--accent-primary) !important;
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1) !important;
         }
@@ -133,7 +149,7 @@
             background-size: 1rem;
         }
 
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 8px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
@@ -190,6 +206,29 @@
         }
         .form-message.success { display: block; background: #dcfce7; border: 1px solid #22c55e; color: #15803d; }
         .form-message.error { display: block; background: #fee2e2; border: 1px solid #ef4444; color: #b91c1c; }
+
+        /* Universal Horizontal Scroll for Projects */
+        #projectGrid {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 1rem 0 2rem;
+            gap: 1.5rem;
+            scrollbar-width: thin;
+        }
+        #projectGrid > div {
+            flex: 0 0 300px; /* Default desktop width */
+            scroll-snap-align: start;
+        }
+
+        @media (max-width: 640px) {
+            #projectGrid::-webkit-scrollbar { display: none; }
+            #projectGrid { scrollbar-width: none; }
+            #projectGrid > div {
+                flex: 0 0 66.6%; /* Shows roughly 1.5 cards on phone */
+                scroll-snap-align: center;
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -231,7 +270,6 @@
                     IITian-Led Learning Experience
                 </div>
                 <h1 class="text-5xl lg:text-7xl font-bold mb-6 text-slate-900">
-                   
                    <span class="gradient-text">ARK Labs</span><br/> Hands-on 
                      Robotics
                 </h1>
@@ -246,7 +284,7 @@
                         Watch Demo
                     </button>
                 </div>
-                <div class="mt-16 flex gap-12 items-center border-t border-slate-200/50 pt-10">
+                <div class="mt-1 flex gap-12 items-center border-t border-slate-200/50 pt-10">
                     <div class="hover:scale-110 transition-transform duration-300 cursor-default text-center">
                         <span class="text-slate-900 font-bold text-3xl">25+</span>
                         <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">Projects</p>
@@ -270,13 +308,14 @@
                 </div>
             </div>
         </div>
+        <!-- Divider at midpoint -->
+        <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
     </section>
 
-    <section id="programs" class="py-32 px-6">
+    <section id="programs" class="py-16 px-6 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20 reveal">
                 <h2 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight text-slate-900">Choose Your <span class="gradient-text">ARK Journey</span></h2>
-                <p class="text-slate-500 font-mono font-bold uppercase tracking-[0.25em] text-xs">Select a learning module powered by IITIANS</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-10 items-stretch" id="programsGrid">
@@ -290,19 +329,20 @@
                         </div>
                         <span class="badge bg-blue-100 text-blue-700">MOD-01</span>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 text-slate-900 group-hover:text-blue-600 transition-colors">Explorer Mode</h3>
+                    <h3 class="text-2xl font-bold mb-3 text-slate-900 group-hover:text-blue-600 transition-colors">Explorer Pack</h3>
                     <p class="text-slate-600 text-sm mb-8 flex-grow leading-relaxed font-medium">A high-impact introductory experience focused on curiosity and exposure.</p>
                     <ul class="space-y-4 mb-10 text-sm font-semibold text-slate-700">
-                        <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div> 3-Hour Experience</li>
-                        <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div> IITian Mentorship</li>
-                        <li class="flex items-center gap-3 text-blue-600"><div class="w-1.5 h-1.5 rounded-full bg-blue-600"></div> Capacity: 50 Students</li>
+                        <li class="flex items-center gap-3">🚀 3-Hour Experience</li>
+                        <li class="flex items-center gap-3">🤖 Experience pre-made projects</li>
+                        <li class="flex items-center gap-3">🧠 IITian Mentorship</li>
+                        <li class="flex items-center gap-3 text-blue-600">👥 Capacity: 50 Students</li>
                     </ul>
                     <button onclick="selectProgram('Explorer Mode')" class="w-full py-4 rounded-xl bg-slate-900 text-white font-bold uppercase text-xs tracking-widest transition-all hover:bg-blue-600 shadow-lg shadow-slate-900/10">
                         Enquire Now
                     </button>
                 </div>
 
-                <!-- Program 2 (Featured) -->
+                <!-- Program 2 -->
                 <div class="pro-card p-10 rounded-[2.5rem] flex flex-col group md:scale-105 relative z-10 stagger-item">
                     <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[11px] font-bold px-6 py-1.5 rounded-full font-mono uppercase tracking-widest shadow-lg">
                         Most Popular
@@ -315,12 +355,13 @@
                         </div>
                         <span class="badge bg-blue-100 text-blue-700">MOD-02</span>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 text-slate-900 group-hover:text-blue-600 transition-colors">Builder Mode</h3>
+                    <h3 class="text-2xl font-bold mb-3 text-slate-900 group-hover:text-blue-600 transition-colors">Builder Pack</h3>
                     <p class="text-slate-600 text-sm mb-8 flex-grow leading-relaxed font-medium">Intensive workshop where students assemble and program their first autonomous robot.</p>
                     <ul class="space-y-4 mb-10 text-sm font-semibold text-slate-700">
-                        <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div> Theory + Practical</li>
-                        <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div> Guided Kit Assembly</li>
-                        <li class="flex items-center gap-3 text-blue-600 font-bold"><div class="w-1.5 h-1.5 rounded-full bg-blue-600"></div> Capacity: 50 Students</li>
+                        <li class="flex items-center gap-3">🛠️ Theory + Practical</li>
+                        <li class="flex items-center gap-3">📦 Guided Kit Assembly</li>
+                        <li class="flex items-center gap-3">🧠 IITian Mentorship</li>
+                        <li class="flex items-center gap-3 text-blue-600 font-bold">👥 Capacity: 50 Students</li>
                     </ul>
                     <button onclick="selectProgram('Builder Mode')" class="w-full py-4 rounded-xl bg-blue-600 text-white font-bold uppercase text-xs tracking-widest transition-all hover:bg-slate-900 shadow-lg shadow-blue-600/20">
                         Enquire Now
@@ -337,12 +378,13 @@
                         </div>
                         <span class="badge bg-indigo-100 text-indigo-700">MOD-03</span>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 text-slate-900 group-hover:text-indigo-600 transition-colors">Engineer Mode</h3>
+                    <h3 class="text-2xl font-bold mb-3 text-slate-900 group-hover:text-indigo-600 transition-colors">Engineer Pack</h3>
                     <p class="text-slate-600 text-sm mb-8 flex-grow leading-relaxed font-medium">Advanced series covering interconnected systems and complex logic flow.</p>
                     <ul class="space-y-4 mb-10 text-sm font-semibold text-slate-700">
-                        <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 rounded-full bg-indigo-500"></div> 6 Interlinked Projects</li>
-                        <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 rounded-full bg-indigo-500"></div> Mission-Based Learning</li>
-                        <li class="flex items-center gap-3 text-indigo-600 font-bold"><div class="w-1.5 h-1.5 rounded-full bg-indigo-600"></div> Capacity: 40 Students</li>
+                        <li class="flex items-center gap-3">🏗️ 6 Interlinked Projects</li>
+                        <li class="flex items-center gap-3">🎯 Mission-Based Learning</li>
+                        <li class="flex items-center gap-3">🧠 IITian Mentorship</li>
+                        <li class="flex items-center gap-3 text-indigo-600 font-bold">👥 Capacity: 40 Students</li>
                     </ul>
                     <button onclick="selectProgram('Engineer Mode')" class="w-full py-4 rounded-xl bg-slate-900 text-white font-bold uppercase text-xs tracking-widest transition-all hover:bg-blue-600 shadow-lg shadow-slate-900/10">
                         Enquire Now
@@ -350,20 +392,24 @@
                 </div>
             </div>
         </div>
+        <!-- Divider at midpoint -->
+        <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
     </section>
 
-    <section id="inventory" class="py-32 relative overflow-hidden">
+    <section id="inventory" class="py-16 relative">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16 reveal">
                 <p class="text-blue-600 font-mono font-bold uppercase tracking-[0.2em] text-xs mb-4">Engineering Showcase</p>
-                <h2 class="text-4xl md:text-5xl font-bold text-slate-900">Project <span class="gradient-text">Inventory.</span></h2>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900">Project <span class="gradient-text">Inventory</span></h2>
                 <p class="mt-4 text-slate-500 font-medium text-lg">Exploring 25+ Engineering Modules designed by IITIANS.</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="projectGrid"></div>
+            <div id="projectGrid"></div>
         </div>
+        <!-- Divider at midpoint -->
+        <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
     </section>
 
-    <section id="about" class="py-32 px-6 bg-transparent relative overflow-hidden">
+    <section id="about" class="py-16 px-6 bg-transparent relative">
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-24 reveal">
                 <p class="text-blue-600 font-mono font-bold uppercase tracking-[0.3em] text-sm mb-4">Core Philosophy</p>
@@ -375,21 +421,21 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="grid gap-8">
                     <div class="pro-card p-10 rounded-[2.5rem] flex gap-8 items-start group reveal-left">
-                        <div class="text-6xl font-bold text-blue-50/50 group-hover:text-blue-600 transition-all duration-700 font-mono leading-none">01</div>
+                        <div class="text-6xl font-bold text-slate-200 group-hover:text-blue-600 transition-all duration-700 font-mono leading-none">01</div>
                         <div>
                             <h4 class="text-2xl font-bold mb-3 text-slate-900">Mentored By IITians</h4>
                             <p class="text-slate-500 font-medium leading-relaxed text-lg">Real engineering insights from IIT Patna alumni who have built autonomous systems at industrial scales.</p>
                         </div>
                     </div>
                     <div class="pro-card p-10 rounded-[2.5rem] flex gap-8 items-start group reveal-left">
-                        <div class="text-6xl font-bold text-blue-50/50 group-hover:text-blue-600 transition-all duration-700 font-mono leading-none">02</div>
+                        <div class="text-6xl font-bold text-slate-200 group-hover:text-blue-600 transition-all duration-700 font-mono leading-none">02</div>
                         <div>
                             <h4 class="text-2xl font-bold mb-3 text-slate-900">NEP 2020 Standards</h4>
                             <p class="text-slate-500 font-medium leading-relaxed text-lg">Fully aligned with modern educational standards for experiential learning and integrated science thinking.</p>
                         </div>
                     </div>
                     <div class="pro-card p-10 rounded-[2.5rem] flex gap-8 items-start group reveal-left">
-                        <div class="text-6xl font-bold text-blue-50/50 group-hover:text-blue-600 transition-all duration-700 font-mono leading-none">03</div>
+                        <div class="text-6xl font-bold text-slate-200 group-hover:text-blue-600 transition-all duration-700 font-mono leading-none">03</div>
                         <div>
                             <h4 class="text-2xl font-bold mb-3 text-slate-900">Concept-First Logic</h4>
                             <p class="text-slate-500 font-medium leading-relaxed text-lg">We go beyond rote assembly. Students learn the mathematical logic and the "Why" behind every sensor.</p>
@@ -418,10 +464,12 @@
                 </div>
             </div>
         </div>
+        <!-- Divider at midpoint -->
+        <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
     </section>
 
     <!-- Glass CTA Section -->
-    <section class="py-32 px-6 relative overflow-hidden">
+    <section class="py-16 px-6 relative overflow-hidden">
         <div class="max-w-5xl mx-auto text-center relative z-10 border border-white/50 rounded-[4rem] p-16 pro-card reveal group">
             <h2 class="text-4xl md:text-6xl font-bold mb-8 uppercase tracking-tight text-slate-900">Bring <span class="gradient-text">ARK Labs</span> <br/> to Your School</h2>
             <p class="text-xl text-slate-600 mb-12 font-medium">Hands-on | Interactive | Future-ready | By IITIANS</p>
@@ -431,30 +479,32 @@
             </div>
             <p class="mt-12 text-[11px] font-mono text-slate-500 font-bold uppercase tracking-[0.3em]">Available for Classes VIII to X</p>
         </div>
+        <!-- Divider at midpoint -->
+        <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
     </section>
 
-    <section id="enquiry-form" class="py-32 px-6">
+    <section id="enquiry-form" class="py-16 px-6">
         <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
             <h2 class="text-4xl font-bold mb-6 tracking-tight text-slate-900">Program <span class="gradient-text">Enquiry</span></h2>
             <form id="submissionForm" class="pro-card space-y-8 text-left p-12 rounded-[3rem] shadow-2xl transition-transform duration-500 hover:scale-[1.01]">
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="space-y-2">
                         <label class="text-[10px] font-bold text-blue-600 uppercase tracking-widest pl-1">Full Name</label>
-                        <input type="text" name="name" placeholder=" " required class="w-full rounded-xl p-4 text-sm outline-none">
+                        <input type="text" name="name" placeholder="Enter name" required class="w-full rounded-xl p-4 text-sm outline-none">
                     </div>
                     <div class="space-y-2">
                         <label class="text-[10px] font-bold text-blue-600 uppercase tracking-widest pl-1">Email Address</label>
-                        <input type="email" name="email" placeholder=" " required class="w-full rounded-xl p-4 text-sm outline-none">
+                        <input type="email" name="email" placeholder="Enter email" required class="w-full rounded-xl p-4 text-sm outline-none">
                     </div>
                 </div>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="space-y-2">
                         <label class="text-[10px] font-bold text-blue-600 uppercase tracking-widest pl-1">Phone Number</label>
-                        <input type="tel" name="phone" placeholder=" " required class="w-full rounded-xl p-4 text-sm outline-none">
+                        <input type="tel" name="phone" placeholder="Enter phone" required class="w-full rounded-xl p-4 text-sm outline-none">
                     </div>
                     <div class="space-y-2">
                         <label class="text-[10px] font-bold text-blue-600 uppercase tracking-widest pl-1">School Name</label>
-                        <input type="text" name="school" placeholder=" " required class="w-full rounded-xl p-4 text-sm outline-none">
+                        <input type="text" name="school" placeholder="Enter school" required class="w-full rounded-xl p-4 text-sm outline-none">
                     </div>
                 </div>
                 <div class="space-y-2">
@@ -538,10 +588,9 @@
                 <div>
                     <h4 class="text-slate-900 font-bold mb-6 text-sm uppercase tracking-widest">Connect</h4>
                     <ul class="space-y-4 text-sm font-semibold text-slate-500">
-                        
                         <li class="flex items-center gap-3">
                             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            <span>anand</span>
+                            <span>info@arklabs.in</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-2.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
