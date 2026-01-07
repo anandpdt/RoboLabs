@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institutional Robotics Program Proposal | ARK Labs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Michroma&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #F8FAFC;
+            --accent-primary: #2563EB; 
+            --accent-secondary: #0F172A;
+            --text-main: #1E293B;
+            --bg-glass: rgba(255, 255, 255, 0.8);
+            --border-glass: rgba(255, 255, 255, 0.6);
+        }
+
+        body {
+            background: linear-gradient(-45deg, #F8FAFC, #F1F5F9, #EFF6FF, #F8FAFC);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .font-heading { font-family: 'Space Grotesk', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        .pro-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(16px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pro-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 30px 60px -12px rgba(37, 99, 235, 0.15);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 50%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .reward-pill {
+            background: linear-gradient(90deg, #F59E0B, #D97706);
+            color: white;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
+        }
+
+        .check-icon { color: #22C55E; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header / Value Prop for Principals -->
+    <header class="pt-20 pb-12 px-6 text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-blue-100 text-blue-700 text-[11px] font-bold font-mono uppercase tracking-widest border border-blue-200">
+            Institutional Partnership Programs 2024-25
+        </div>
+        <h1 class="text-4xl md:text-7xl font-bold font-heading text-slate-900 mb-6 tracking-tight leading-[1.1]">
+            Institutional Excellence via <br/><span class="gradient-text">IITian-Led Robotics</span>
+        </h1>
+        <p class="max-w-3xl mx-auto text-slate-600 text-lg md:text-xl font-medium mb-12">
+            A comprehensive curriculum proposal designed to transform school labs into hubs of high-end engineering logic, mentored exclusively by IIT Patna alumni.
+        </p>
+
+        <!-- Outcome Highlights for Principals -->
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 px-4">
+            <div class="pro-card p-6 rounded-3xl text-left border-blue-50">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white mb-4">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                </div>
+                <h4 class="font-bold text-slate-900 text-sm mb-2">Better Than Peers</h4>
+                <p class="text-xs text-slate-500 leading-relaxed">Students develop a level of hardware maturity and logical debugging skills that far exceed standard school competition levels.</p>
+            </div>
+            <div class="pro-card p-6 rounded-3xl text-left border-blue-50">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white mb-4">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="font-bold text-slate-900 text-sm mb-2">Exhibition Ready</h4>
+                <p class="text-xs text-slate-500 leading-relaxed">Our project builds are specifically calibrated for high-scoring entries in National Science Exhibitions and Olypmiads.</p>
+            </div>
+            <div class="pro-card p-6 rounded-3xl text-left border-blue-50">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white mb-4">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+                <h4 class="font-bold text-slate-900 text-sm mb-2">NEP 2020 Aligned</h4>
+                <p class="text-xs text-slate-500 leading-relaxed">Fulfil educational standards for experiential learning, critical thinking, and integrated science technology training.</p>
+            </div>
+            <div class="pro-card p-6 rounded-3xl text-left border-blue-50">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white mb-4">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                </div>
+                <h4 class="font-bold text-slate-900 text-sm mb-2">Institutional Pride</h4>
+                <p class="text-xs text-slate-500 leading-relaxed">Collaboration with IIT Patna alumni strengthens your school's reputation as a premium technology-driven institution.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pricing Grid -->
+    <section class="py-12 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 items-stretch">
+            
+            <!-- Plan 1 -->
+            <div class="pro-card rounded-[3rem] p-10 flex flex-col group border-slate-100">
+                <div class="mb-8">
+                    <span class="px-4 py-1 rounded-full bg-blue-100 text-blue-600 text-[10px] font-bold font-mono uppercase tracking-widest border border-blue-200">Module 01</span>
+                    <h3 class="text-3xl font-bold font-heading mt-6 text-slate-900">Explorer Pack</h3>
+                    <p class="text-slate-500 text-sm mt-3">Foundational Engineering Awareness</p>
+                </div>
+                
+                <div class="mb-8 p-6 bg-slate-50 rounded-3xl border border-slate-100">
+                    <div class="text-4xl font-bold text-slate-900 tracking-tight">₹25,000</div>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="text-[11px] font-bold text-blue-600 uppercase tracking-widest">3-Hour Intensive</span>
+                        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">50 Students</span>
+                    </div>
+                </div>
+
+                <ul class="space-y-4 mb-4 flex-grow">
+                    <li class="flex items-start gap-4 text-sm font-medium text-slate-600">
+                        <svg class="check-icon w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        <span>Deep-dive theory on Robotics, Micro-controllers, and Sensor physics.</span>
+                    </li>
+                    <li class="flex items-start gap-4 text-sm font-medium text-slate-600">
+                        <svg class="check-icon w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        <span>Interactive live demonstrations of <b>Robotic Arms</b> and <b>Phone Controlled systems</b>.</span>
+                    </li>
+                    <li class="flex items-start gap-4 text-sm font-medium text-slate-600">
+                        <svg class="check-icon w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        <span>Hands-on experience with 15+ "Mini-Robotics" modules and smart garage prototypes.</span>
+                    </li>
+                </ul>
+                <div class="mt-auto pt-6 border-t border-slate-100 italic text-[11px] text-slate-400 font-medium">Concept-first mechanical and logical project breakdown.</div>
+            </div>
+
+            <!-- Plan 2 -->
+            <div class="pro-card rounded-[3.5rem] p-10 border-blue-200 relative md:-translate-y-4 shadow-2xl flex flex-col group">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 reward-pill px-8 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Institutional Merit Award</div>
+                
+                <div class="mb-8">
+                    <span class="px-4 py-1 rounded-full bg-blue-100 text-blue-600 text-[10px] font-bold font-mono uppercase tracking-widest border border-blue-200">Module 02</span>
+                    <h3 class="text-3xl font-bold font-heading mt-6 text-slate-900">Builder Pack</h3>
+                    <p class="text-slate-500 text-sm mt-3">Skill Acquisition & Practical Execution</p>
+                </div>
+                
+                <div class="mb-8 p-6 bg-blue-50/50 rounded-3xl border border-blue-100">
+                    <div class="text-4xl font-bold text-slate-900 tracking-tight">₹35,000</div>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="text-[11px] font-bold text-blue-600 uppercase tracking-widest">4.5-Hour Workshop</span>
+                        <span class="text-[11px] font-bold text-slate-500 uppercase tracking-widest">50 Students</span>
+                    </div>
+                </div>
+
+                <ul class="space-y-4 mb-4 flex-grow">
+                    <li class="flex items-start gap-4 text-sm font-medium text-slate-700">
+                        <svg class="check-icon w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        <span>Intensive theory + Guided assembly of group-led project kits.</span>
+                    </li>
+                    <li class="flex items-start gap-4 text-sm font-medium text-slate-700">
+                        <svg class="check-icon w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        <span>Build modules: <b>Ultrasonic Radars</b>, <b>Fire Alarms</b>, <b>Gas Detectors</b>, and many more.</span>
+                    </li>
+                    <li class="flex items-start gap-4 text-sm font-bold text-blue-700 p-4 bg-white/60 rounded-2xl border border-blue-100 italic">
+                        <svg class="w-6 h-6 text-amber-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <span><b>The Top Performer</b> wins an all-expenses visit to IIT Patna Campus & Lunch!</span>
+                    </li>
+                </ul>
+                <div class="mt-auto pt-6 border-t border-blue-100 italic text-[11px] text-slate-400 font-medium text-center">Focus on real-world use-cases and environmental integration.</div>
+            </div>
+
+            <!-- Plan 3 -->
+            <div class="pro-card rounded-[3rem] p-10 flex flex-col group border-slate-100">
+                <div class="mb-8">
+                    <span class="px-4 py-1 rounded-full bg-blue-100 text-blue-600 text-[10px] font-bold font-mono uppercase tracking-widest border border-blue-200">Module 03</span>
+                    <h3 class="text-3xl font-bold font-heading mt-6 text-slate-900">Engineer Pack</h3>
+                    <p class="text-slate-500 text-sm mt-3">Narrative-Driven Problem Solving</p>
+                </div>
+                
+                <div class="mb-8 p-6 bg-slate-50 rounded-3xl border border-slate-100">
+                    <div class="text-4xl font-bold text-slate-900 tracking-tight">₹45,000</div>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="text-[11px] font-bold text-blue-600 uppercase tracking-widest">Two 3-Hour Sessions</span>
+                        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">40 Students</span>
+                    </div>
+                </div>
+
+                <ul class="space-y-4 mb-4 flex-grow">
+                    <li class="flex items-start gap-4 text-sm font-medium text-slate-600">
+                        <svg class="check-icon w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        <span><b>Story-Timeline Learning</b>: Solving real-world narrative challenges via engineering.</span>
+                    </li>
+                    <li class="flex items-start gap-4 text-sm font-medium text-slate-600">
+                        <svg class="check-icon w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        <span>Advanced kits ranging from basic logic gates to interconnected IoT modules.</span>
+                    </li>
+                    <li class="flex items-start gap-4 text-sm font-bold text-blue-700 p-4 bg-white/60 rounded-2xl border border-blue-100 italic">
+                        <svg class="w-6 h-6 text-amber-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <span><b>Top 2 Performers</b> win a fully sponsored visit & tour of the IIT Patna Campus!</span>
+                    </li>
+                </ul>
+                <div class="mt-auto pt-6 border-t border-slate-100 italic text-[11px] text-slate-400 font-medium text-center">Self-driven discovery of use-cases and innovative solutions.</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Professional Summary -->
+    <section class="py-16 px-6">
+        <div class="max-w-4xl mx-auto pro-card rounded-[3rem] p-12 text-center bg-slate-900 text-white border-none relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px]"></div>
+            <h2 class="text-3xl font-bold font-heading mb-6 relative z-10">Mentorship Excellence</h2>
+            <p class="text-slate-400 mb-6 relative z-10">
+                Our programs are not mere tuition; they are engineering experiences. Each session is managed and executed by graduates from IIT Patna, ensuring your students receive top-tier academic and practical guidance.
+            </p>
+            <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
+            <p class="text-[10px] font-mono text-slate-500 font-bold uppercase tracking-[0.4em]">IIT Patna Mentors • NEP 2020 Compliant • Project-First Logic</p>
+        </div>
+    </section>
+
+    <!-- Static Institutional Footer -->
+    <footer class="py-12 text-center">
+        <div class="max-w-4xl mx-auto border-t border-slate-200 pt-8">
+            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">ARK Labs Institutional Proposal</p>
+            <p class="text-[9px] font-mono text-slate-300 font-bold uppercase tracking-[0.2em]">Curriculum Design & Technical Content by IIT Patna Alumni Circle</p>
+        </div>
+    </footer>
+
+</body>
+</html>
