@@ -251,10 +251,10 @@
             </div>
             <div class="hidden md:flex gap-10 text-[11px] font-bold text-slate-600 uppercase tracking-widest">
                 <a href="#programs" class="nav-link hover:text-blue-600 transition-colors">Programs</a>
-                <a href="#inventory" class="nav-link hover:text-blue-600 transition-colors">Project Hub</a>
                 <a href="#about" class="nav-link hover:text-blue-600 transition-colors">Why Us</a>
+                <a href="#inventory" class="nav-link hover:text-blue-600 transition-colors">Project Hub</a>
             </div>
-            <button onclick="document.getElementById('enquiry-form').scrollIntoView({behavior: 'smooth'})" class="px-6 py-2.5 bg-slate-900 text-white font-bold text-xs rounded-xl uppercase hover:bg-blue-600 transition-all active:scale-95 shadow-lg shadow-slate-900/10">
+            <button onclick="revealAndScrollToForm()" class="px-6 py-2.5 bg-slate-900 text-white font-bold text-xs rounded-xl uppercase hover:bg-blue-600 transition-all active:scale-95 shadow-lg shadow-slate-900/10">
                 Contact
             </button>
         </nav>
@@ -332,10 +332,22 @@
                     <h3 class="text-2xl font-bold mb-3 text-slate-900 group-hover:text-blue-600 transition-colors">Explorer Pack</h3>
                     <p class="text-slate-600 text-sm mb-8 flex-grow leading-relaxed font-medium">A high-impact introductory experience focused on curiosity and exposure.</p>
                     <ul class="space-y-4 mb-10 text-sm font-semibold text-slate-700">
-                        <li class="flex items-center gap-3">🚀 3-Hour Experience</li>
-                        <li class="flex items-center gap-3">🤖 Experience pre-made projects</li>
-                        <li class="flex items-center gap-3">🧠 IITian Mentorship</li>
-                        <li class="flex items-center gap-3 text-blue-600">👥 Capacity: 50 Students</li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            3-Hour Experience
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2m16 0h2m-7-1v2m-6-2v2"/></svg>
+                            Experience pre-made projects
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            IITian Mentorship
+                        </li>
+                        <li class="flex items-center gap-3 text-blue-600">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            Capacity: 50 Students
+                        </li>
                     </ul>
                     <button onclick="selectProgram('Explorer Mode')" class="w-full py-4 rounded-xl bg-slate-900 text-white font-bold uppercase text-xs tracking-widest transition-all hover:bg-blue-600 shadow-lg shadow-slate-900/10">
                         Enquire Now
@@ -358,10 +370,22 @@
                     <h3 class="text-2xl font-bold mb-3 text-slate-900 group-hover:text-blue-600 transition-colors">Builder Pack</h3>
                     <p class="text-slate-600 text-sm mb-8 flex-grow leading-relaxed font-medium">Intensive workshop where students assemble and program their first autonomous robot.</p>
                     <ul class="space-y-4 mb-10 text-sm font-semibold text-slate-700">
-                        <li class="flex items-center gap-3">🛠️ Theory + Practical</li>
-                        <li class="flex items-center gap-3">📦 Guided Kit Assembly</li>
-                        <li class="flex items-center gap-3">🧠 IITian Mentorship</li>
-                        <li class="flex items-center gap-3 text-blue-600 font-bold">👥 Capacity: 50 Students</li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg>
+                            Theory + Practical
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>
+                            Guided Kit Assembly
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            IITian Mentorship
+                        </li>
+                        <li class="flex items-center gap-3 text-blue-600 font-bold">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            Capacity: 50 Students
+                        </li>
                     </ul>
                     <button onclick="selectProgram('Builder Mode')" class="w-full py-4 rounded-xl bg-blue-600 text-white font-bold uppercase text-xs tracking-widest transition-all hover:bg-slate-900 shadow-lg shadow-blue-600/20">
                         Enquire Now
@@ -381,29 +405,28 @@
                     <h3 class="text-2xl font-bold mb-3 text-slate-900 group-hover:text-indigo-600 transition-colors">Engineer Pack</h3>
                     <p class="text-slate-600 text-sm mb-8 flex-grow leading-relaxed font-medium">Advanced series covering interconnected systems and complex logic flow.</p>
                     <ul class="space-y-4 mb-10 text-sm font-semibold text-slate-700">
-                        <li class="flex items-center gap-3">🏗️ 6 Interlinked Projects</li>
-                        <li class="flex items-center gap-3">🎯 Mission-Based Learning</li>
-                        <li class="flex items-center gap-3">🧠 IITian Mentorship</li>
-                        <li class="flex items-center gap-3 text-indigo-600 font-bold">👥 Capacity: 40 Students</li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-4 h-4 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                            6 Interlinked Projects
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-4 h-4 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                            Mission-Based Learning
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-4 h-4 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            IITian Mentorship
+                        </li>
+                        <li class="flex items-center gap-3 text-indigo-600 font-bold">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            Capacity: 40 Students
+                        </li>
                     </ul>
                     <button onclick="selectProgram('Engineer Mode')" class="w-full py-4 rounded-xl bg-slate-900 text-white font-bold uppercase text-xs tracking-widest transition-all hover:bg-blue-600 shadow-lg shadow-slate-900/10">
                         Enquire Now
                     </button>
                 </div>
             </div>
-        </div>
-        <!-- Divider at midpoint -->
-        <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
-    </section>
-
-    <section id="inventory" class="py-16 relative">
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 reveal">
-                <p class="text-blue-600 font-mono font-bold uppercase tracking-[0.2em] text-xs mb-4">Engineering Showcase</p>
-                <h2 class="text-4xl md:text-5xl font-bold text-slate-900">Project <span class="gradient-text">Inventory</span></h2>
-                <p class="mt-4 text-slate-500 font-medium text-lg">Exploring 25+ Engineering Modules designed by IITIANS.</p>
-            </div>
-            <div id="projectGrid"></div>
         </div>
         <!-- Divider at midpoint -->
         <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
@@ -474,7 +497,7 @@
             <h2 class="text-4xl md:text-6xl font-bold mb-8 uppercase tracking-tight text-slate-900">Bring <span class="gradient-text">ARK Labs</span> <br/> to Your School</h2>
             <p class="text-xl text-slate-600 mb-12 font-medium">Hands-on | Interactive | Future-ready | By IITIANS</p>
             <div class="flex flex-col sm:flex-row gap-5 justify-center">
-                <button onclick="document.getElementById('enquiry-form').scrollIntoView({behavior: 'smooth'})" class="px-12 py-5 bg-blue-600 text-white font-bold text-sm rounded-2xl shadow-xl shadow-blue-600/30 uppercase tracking-widest hover:scale-105 hover:bg-blue-700 transition-all">School Registration</button>
+                <button onclick="revealAndScrollToForm()" class="px-12 py-5 bg-blue-600 text-white font-bold text-sm rounded-2xl shadow-xl shadow-blue-600/30 uppercase tracking-widest hover:scale-105 hover:bg-blue-700 transition-all">School Registration</button>
                 <button class="px-12 py-5 bg-white/40 border border-white/80 font-bold text-sm rounded-2xl hover:bg-white uppercase tracking-widest transition-all text-slate-700 hover:scale-105">Download Brochure</button>
             </div>
             <p class="mt-12 text-[11px] font-mono text-slate-500 font-bold uppercase tracking-[0.3em]">Available for Classes VIII to X</p>
@@ -483,7 +506,22 @@
         <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
     </section>
 
-    <section id="enquiry-form" class="py-16 px-6">
+    <!-- ARK Inventory Section (Moved after Bring Lab section) -->
+    <section id="inventory" class="py-16 relative">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <p class="text-blue-600 font-mono font-bold uppercase tracking-[0.2em] text-xs mb-4">Engineering Showcase</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900">Project <span class="gradient-text">Inventory</span></h2>
+                <p class="mt-4 text-slate-500 font-medium text-lg">Exploring 25+ Engineering Modules designed by IITIANS.</p>
+            </div>
+            <div id="projectGrid"></div>
+        </div>
+        <!-- Divider at midpoint -->
+        <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
+    </section>
+
+    <!-- Enquiry Form Section (Initially Hidden) -->
+    <section id="enquiry-form" class="py-16 px-6 hidden">
         <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
             <h2 class="text-4xl font-bold mb-6 tracking-tight text-slate-900">Program <span class="gradient-text">Enquiry</span></h2>
             <form id="submissionForm" class="pro-card space-y-8 text-left p-12 rounded-[3rem] shadow-2xl transition-transform duration-500 hover:scale-[1.01]">
@@ -567,9 +605,9 @@
                     <h4 class="text-slate-900 font-bold mb-6 text-sm uppercase tracking-widest">Navigation</h4>
                     <ul class="space-y-4 text-sm font-semibold text-slate-500">
                         <li><a href="#programs" class="hover:text-blue-600 transition-colors">Programs</a></li>
-                        <li><a href="#inventory" class="hover:text-blue-600 transition-colors">Project Hub</a></li>
                         <li><a href="#about" class="hover:text-blue-600 transition-colors">Why Choose Us</a></li>
-                        <li><a href="#enquiry-form" class="hover:text-blue-600 transition-colors">Registration</a></li>
+                        <li><a href="#inventory" class="hover:text-blue-600 transition-colors">Project Hub</a></li>
+                        <li><a href="javascript:revealAndScrollToForm()" class="hover:text-blue-600 transition-colors">Registration</a></li>
                     </ul>
                 </div>
 
@@ -675,7 +713,13 @@
 
         function selectProgram(mode) {
             document.getElementById('programSelect').value = mode;
-            document.getElementById('enquiry-form').scrollIntoView({behavior: 'smooth'});
+            revealAndScrollToForm();
+        }
+
+        function revealAndScrollToForm() {
+            const formSection = document.getElementById('enquiry-form');
+            formSection.classList.remove('hidden');
+            formSection.scrollIntoView({behavior: 'smooth'});
         }
 
         const observer = new IntersectionObserver((entries) => {
