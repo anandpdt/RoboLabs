@@ -229,6 +229,22 @@
                 scroll-snap-align: center;
             }
         }
+
+        /* Modal Specific Styles */
+        #codeModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        #codeModal.show {
+            display: flex;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -249,16 +265,35 @@
                     <span class="text-[9px]  text-blue-600 font-bold tracking-[0.2em] uppercase block mt-1">IIT PATNA MENTORS</span>
                 </div>
             </div>
-            <!-- Moved sidewise: Shifted right from center -->
+            <!-- Pricing Link added here -->
             <div class="hidden md:flex ml-auto mr-12 gap-10 text-[11px] font-bold text-slate-600 uppercase tracking-widest">
                 <a href="#about" class="nav-link hover:text-blue-600 transition-colors">Why Us</a>
                 <a href="#programs" class="nav-link hover:text-blue-600 transition-colors">Programs</a>
                 <a href="#inventory" class="nav-link hover:text-blue-600 transition-colors">Project Hub</a>
+                <a href="javascript:void(0)" onclick="openPricingModal()" class="nav-link hover:text-blue-600 transition-colors">Pricing</a>
             </div>
             <button onclick="revealAndScrollToForm()" class="px-6 py-2.5 bg-slate-900 text-white font-bold text-xs rounded-xl uppercase hover:bg-blue-600 transition-all active:scale-95 shadow-lg shadow-slate-900/10">
                 Contact
             </button>
         </nav>
+    </div>
+
+    <!-- Pricing Modal -->
+    <div id="codeModal">
+        <div class="pro-card p-8 md:p-12 rounded-[2.5rem] w-full max-w-md shadow-2xl">
+            <h3 class="text-2xl font-bold text-slate-900 mb-2">School Access</h3>
+            <p class="text-slate-500 text-sm mb-8 font-medium">Please enter the school code provided by the ARK Labs team to view our pricing structure.</p>
+            
+            <div class="space-y-4">
+                <input type="text" id="schoolCodeInput" placeholder="Enter alphanumeric code" class="w-full rounded-xl p-4 text-sm font-mono tracking-wider outline-none">
+                <div id="modalErrorMessage" class="text-red-500 text-xs font-bold uppercase hidden">Incorrect code. Please try again.</div>
+                
+                <div class="flex gap-4 pt-4">
+                    <button onclick="closePricingModal()" class="flex-1 py-4 text-slate-500 font-bold uppercase text-xs tracking-widest hover:text-slate-900 transition-all">Cancel</button>
+                    <button onclick="validateSchoolCode()" class="flex-[2] py-4 bg-blue-600 text-white font-bold uppercase text-xs tracking-widest rounded-xl shadow-lg shadow-blue-600/20 hover:bg-blue-700 transition-all">Verify Code</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <section class="relative min-h-screen flex items-center pt-32 px-6 lg:px-20 overflow-hidden hero-gradient">
@@ -492,6 +527,8 @@
             <p class="text-xl text-slate-600 mb-12 font-medium">Hands-on | Interactive | Future-ready | By IITIANS</p>
             <div class="flex flex-col sm:flex-row gap-5 justify-center">
                 <button onclick="revealAndScrollToForm()" class="px-12 py-5 bg-blue-600 text-white font-bold text-sm rounded-2xl shadow-xl shadow-blue-600/30 uppercase tracking-widest hover:scale-105 hover:bg-blue-700 transition-all">School Registration</button>
+                <!-- See Pricing button added here -->
+                <button onclick="openPricingModal()" class="px-12 py-5 bg-white/40 border border-white/80 font-bold text-sm rounded-2xl hover:bg-white uppercase tracking-widest transition-all text-slate-700 hover:scale-105">See Pricing</button>
                 <button class="px-12 py-5 bg-white/40 border border-white/80 font-bold text-sm rounded-2xl hover:bg-white uppercase tracking-widest transition-all text-slate-700 hover:scale-105">Download Brochure</button>
             </div>
             <p class="mt-12 text-[11px] font-mono text-slate-500 font-bold uppercase tracking-[0.3em]">Available for Classes VIII to X</p>
@@ -614,14 +651,14 @@
                     <div class="flex gap-4">
                         <!-- Email Link with Icon -->
                         <a href="mailto:arklabs.in@gmail.com" class="w-10 h-10 rounded-full bg-white/50 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white transition-all shadow-sm" title="Email Us">
-                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                 <polyline points="22,6 12,13 2,6"></polyline>
                             </svg>
                         </a>
                         <!-- WhatsApp Link with Icon -->
-                        <a href="https://wa.me/917050342098" target="_blank" class="w-10 h-10 rounded-full bg-white/50 flex items-center justify-center text-slate-400 hover:text-green-600 hover:bg-white transition-all shadow-sm" title="Chat on WhatsApp">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <a href="https://wa.me/+917050342098" target="_blank" class="w-10 h-10 rounded-full bg-white/50 flex items-center justify-center text-slate-400 hover:text-green-600 hover:bg-white transition-all shadow-sm" title="Chat on WhatsApp">
+                            <svg width="20" height="18" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         </a>
                     </div>
@@ -701,6 +738,30 @@
             grid.appendChild(card);
         });
 
+        // Pricing Modal Logic
+        function openPricingModal() {
+            const modal = document.getElementById('codeModal');
+            modal.classList.add('show');
+            document.getElementById('schoolCodeInput').value = '';
+            document.getElementById('modalErrorMessage').classList.add('hidden');
+        }
+
+        function closePricingModal() {
+            document.getElementById('codeModal').classList.remove('show');
+        }
+
+        function validateSchoolCode() {
+            const inputCode = document.getElementById('schoolCodeInput').value;
+            const correctCode = "rhituj.ka.bhosada";
+            const errorMsg = document.getElementById('modalErrorMessage');
+
+            if (inputCode === correctCode) {
+                window.location.href = '1.html';
+            } else {
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
         function selectProgram(mode) {
             document.getElementById('programSelect').value = mode;
             revealAndScrollToForm();
@@ -757,6 +818,14 @@
                 document.getElementById('loadingSpinner').classList.add('hidden');
             });
         });
+
+        // Close modal if user clicks outside the content area
+        window.onclick = function(event) {
+            const modal = document.getElementById('codeModal');
+            if (event.target == modal) {
+                closePricingModal();
+            }
+        }
     </script>
 </body>
 </html>
