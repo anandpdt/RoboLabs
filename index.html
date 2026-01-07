@@ -7,66 +7,102 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Pairing: Michroma (Technical/Branding), Space Grotesk (Headers), Inter (Body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@500;700&family=Michroma&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --space-black: #050B18;
-            --neon-cyan: #00E5FF;
-            --robot-green: #4DFF88;
-            --accent-red: #FF4D4D;
+            /* Midnight Slate Base */
+            --midnight-bg: #020617;
+            /* Azure Primary Accent */
+            --azure-primary: #3b82f6;
+            --azure-glow: rgba(59, 130, 246, 0.5);
+            /* Technical Secondary */
+            --slate-accent: #94a3b8;
+            --robot-cyan: #06b6d4;
+            --error-red: #ef4444;
         }
 
         body {
-            background-color: var(--space-black);
-            color: #E2E8F0;
+            background-color: var(--midnight-bg);
+            color: #f1f5f9;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        h1, h2, h3, .font-orbitron {
-            font-family: 'Orbitron', sans-serif;
+        /* Standard headers - Technical feel */
+        h2, h3, h4, .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        /* The "Robotics" Branding */
+        h1, 
+        .robotics-title,
+        .logo-text {
+            font-family: 'Michroma', sans-serif;
+            text-transform: uppercase;
             letter-spacing: 0.05em;
+        }
+
+        h1 {
+            letter-spacing: -0.01em;
+            line-height: 1.1;
         }
 
         .font-mono {
             font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.05em;
         }
 
-        /* Glassmorphism */
+        /* Glassmorphism - Updated for Midnight Slate */
         .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+            background: rgba(30, 41, 59, 0.5);
+            border-color: var(--azure-primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(59, 130, 246, 0.15);
             transform: translateY(-4px);
         }
 
-        /* Circuit Background Animation */
+        /* Hero Background Gradient Animation - Midnight Blue & Deep Slate */
+        @keyframes heroGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-animated-bg {
+            background: linear-gradient(-45deg, #020617, #0f172a, #020617, #1e1b4b);
+            background-size: 400% 400%;
+            animation: heroGradient 20s ease infinite;
+        }
+
+        /* Circuit Background Animation - Azure Dots */
         .circuit-bg {
             position: absolute;
             inset: 0;
             z-index: -1;
-            background-image: radial-gradient(circle at 2px 2px, rgba(0, 229, 255, 0.05) 1px, transparent 0);
+            background-image: radial-gradient(circle at 2px 2px, rgba(59, 130, 246, 0.05) 1px, transparent 0);
             background-size: 40px 40px;
-            opacity: 0.5;
+            opacity: 0.6;
         }
 
-        .glow-cyan { text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
+        .glow-azure { text-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
 
         .scanline {
             width: 100%;
             height: 2px;
-            background: linear-gradient(to right, transparent, var(--neon-cyan), transparent);
+            background: linear-gradient(to right, transparent, var(--azure-primary), transparent);
             position: absolute;
             top: 0;
-            animation: scan 4s linear infinite;
-            opacity: 0.3;
+            animation: scan 6s linear infinite;
+            opacity: 0.1;
         }
 
         @keyframes scan {
@@ -75,7 +111,7 @@
         }
 
         .rotate-slow {
-            animation: rotate 20s linear infinite;
+            animation: rotate 40s linear infinite;
         }
 
         @keyframes rotate {
@@ -89,242 +125,264 @@
         }
 
         .project-grid-item:hover {
-            border-left: 2px solid var(--neon-cyan);
+            border-left: 2px solid var(--azure-primary);
         }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--space-black); }
-        ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--midnight-bg); }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--azure-primary); }
 
         .badge {
             font-size: 0.65rem;
-            padding: 2px 8px;
-            border-radius: 4px;
+            padding: 4px 10px;
+            border-radius: 6px;
             text-transform: uppercase;
-            font-weight: bold;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         /* Form Feedback */
         .form-message {
             display: none;
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            font-family: 'JetBrains Mono', monospace;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
+            border-radius: 0.75rem;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
             text-align: center;
+            font-weight: 500;
         }
         .form-message.success {
             display: block;
-            background: rgba(77, 255, 136, 0.1);
-            border: 1px solid var(--robot-green);
-            color: var(--robot-green);
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid #10b981;
+            color: #10b981;
         }
         .form-message.error {
             display: block;
-            background: rgba(255, 77, 77, 0.1);
-            border: 1px solid var(--accent-red);
-            color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error-red);
+            color: var(--error-red);
         }
 
-        /* Custom Select Arrow */
+        /* Custom Select Arrow - Azure */
         .custom-select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2300E5FF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233B82F6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1.25rem;
-            padding-right: 2.5rem;
+            background-position: right 1.25rem center;
+            background-size: 1rem;
+            padding-right: 3rem;
+        }
+
+        input, select, textarea {
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
         }
     </style>
 </head>
-<body>
+<body class="antialiased">
 
     <!-- Header / Navigation -->
-    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center border-b border-white/10 bg-black/50 backdrop-blur-lg">
-        <div class="flex items-center gap-2">
-            <div class="w-10 h-10 rounded border border-cyan-400 flex items-center justify-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-cyan-400">
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center border-b border-white/5 bg-slate-950/80 backdrop-blur-xl">
+        <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-xl border border-blue-500/30 bg-blue-500/5 flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-blue-500">
                     <path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path>
                 </svg>
             </div>
             <div>
-                <span class="font-orbitron font-bold text-xl tracking-tighter leading-none block">ARK <span class="text-cyan-400">Labs</span></span>
-                <span class="text-[10px] font-mono text-cyan-500/80 tracking-widest leading-none uppercase">By IITians</span>
+                <span class="logo-text font-extrabold text-xl tracking-tight leading-none block uppercase">ARK <span class="text-blue-500">Labs</span></span>
+                <span class="text-[10px] font-mono text-blue-400/60 font-bold tracking-[0.2em] leading-none uppercase mt-1 block">Led By IITians</span>
             </div>
         </div>
-        <div class="hidden md:flex gap-8 text-sm font-medium text-slate-400 tracking-wide">
-            <a href="#programs" class="hover:text-cyan-400 transition-colors uppercase">Programs</a>
-            <a href="#inventory" class="hover:text-cyan-400 transition-colors uppercase">Inventory</a>
-            <a href="#about" class="hover:text-cyan-400 transition-colors uppercase">About Us</a>
+        <div class="hidden md:flex gap-10 text-[13px] font-semibold text-slate-400 tracking-wider">
+            <a href="#programs" class="hover:text-blue-400 transition-colors uppercase">Programs</a>
+            <a href="#inventory" class="hover:text-blue-400 transition-colors uppercase">Inventory</a>
+            <a href="#about" class="hover:text-blue-400 transition-colors uppercase">About Us</a>
         </div>
-        <button onclick="document.getElementById('enquiry-form').scrollIntoView({behavior: 'smooth'})" class="px-5 py-2.5 bg-cyan-500/10 border border-cyan-500/50 text-cyan-400 font-bold text-xs rounded uppercase hover:bg-cyan-500 hover:text-black transition-all shadow-[0_0_15px_rgba(0,229,255,0.1)]">
+        <button onclick="document.getElementById('enquiry-form').scrollIntoView({behavior: 'smooth'})" class="px-6 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-lg uppercase hover:bg-blue-500 transition-all shadow-lg shadow-blue-500/20 active:scale-95">
             Contact Us
         </button>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center pt-20 px-6 lg:px-20 overflow-hidden">
+    <section class="relative min-h-screen flex items-center pt-20 px-6 lg:px-20 overflow-hidden hero-animated-bg">
         <div class="circuit-bg"></div>
         <div class="scanline"></div>
 
-        <div class="grid lg:grid-cols-2 gap-12 items-center w-full max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-16 items-center w-full max-w-7xl mx-auto">
             <!-- Hero Left -->
             <div class="z-10">
-                <div class="inline-block px-3 py-1 mb-6 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono uppercase">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[11px] font-bold font-mono uppercase tracking-widest">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-400"></span>
+                    </span>
                     IITian-Led Learning Experience
                 </div>
-                <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-                    Hands-on <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">ARK Labs</span>
+                <h1 class="text-5xl lg:text-7xl font-extrabold mb-8 leading-[1.1] tracking-tight">
+                    Engineering <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">The Future</span>
                 </h1>
-                <p class="text-xl text-slate-400 mb-8 max-w-lg leading-relaxed">
-                    Learn • Touch • Build • Innovate. An immersive engineering experience for Classes 8–10 led exclusively by IITIANS.
+                <p class="text-xl text-slate-400 mb-10 max-w-lg leading-relaxed font-medium">
+                    Learn • Build • Innovate. An immersive robotics experience for Classes 8–10 led exclusively by experts from IIT Patna.
                 </p>
-                <div class="flex flex-wrap gap-4">
-                    <button onclick="document.getElementById('programs').scrollIntoView({behavior: 'smooth'})" class="px-8 py-4 bg-cyan-500 text-black font-bold font-orbitron rounded shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:scale-105 transition-transform">
-                        EXPLORE MODES
+                <div class="flex flex-wrap gap-5">
+                    <button onclick="document.getElementById('programs').scrollIntoView({behavior: 'smooth'})" class="px-10 py-5 bg-blue-600 text-white font-extrabold text-sm rounded-xl shadow-xl shadow-blue-500/20 hover:bg-blue-500 hover:scale-105 transition-all uppercase tracking-wider">
+                        Explore Programs
                     </button>
-                    <button class="px-8 py-4 bg-white/5 border border-white/20 font-bold font-orbitron rounded hover:bg-white/10 transition-colors">
-                        WATCH DEMO
+                    <button class="px-10 py-5 bg-slate-800/40 border border-white/10 font-bold text-sm rounded-xl hover:bg-slate-800/60 transition-colors uppercase tracking-wider text-slate-300">
+                        Watch Demo
                     </button>
                 </div>
-                <div class="mt-12 flex gap-8 items-center border-t border-white/10 pt-8">
+                <div class="mt-16 flex gap-12 items-center border-t border-white/5 pt-10">
                     <div class="flex flex-col">
-                        <span class="text-cyan-400 font-mono text-xl">25+</span>
-                        <span class="text-xs text-slate-500 uppercase tracking-widest">Projects</span>
+                        <span class="text-blue-500 font-bold text-2xl tracking-tight">25+</span>
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">Modules</span>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-emerald-400 font-mono text-xl">IITIANS</span>
-                        <span class="text-xs text-slate-500 uppercase tracking-widest">Instructors</span>
+                        <span class="text-cyan-500 font-bold text-2xl tracking-tight">IIT Patna</span>
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">Faculty</span>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-white font-mono text-xl">NEP 2020</span>
-                        <span class="text-xs text-slate-500 uppercase tracking-widest">Aligned</span>
+                        <span class="text-slate-300 font-bold text-2xl tracking-tight">NEP 2020</span>
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">Certified</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Hero Right (Image Placeholder) -->
+            <!-- Hero Right (Visual Element) -->
             <div class="relative flex justify-center items-center">
-                <div class="absolute w-[400px] h-[400px] border border-cyan-500/20 rounded-full rotate-slow"></div>
-                <div class="absolute w-[500px] h-[500px] border border-white/5 rounded-full rotate-slow" style="animation-direction: reverse;"></div>
+                <div class="absolute w-[450px] h-[450px] border border-blue-500/10 rounded-full rotate-slow"></div>
+                <div class="absolute w-[550px] h-[550px] border border-white/5 rounded-full rotate-slow" style="animation-direction: reverse;"></div>
                 
-                <div class="z-10 relative w-full max-w-md aspect-square bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center overflow-hidden shadow-2xl backdrop-blur-sm">
-                    <!-- Placeholder for the PNG animation -->
-                    <img src="https://via.placeholder.com/600x600/050B18/00E5FF?text=ROBOTIC+SYSTEM+ANIMATION" alt="ARK Labs Robotic System" class="w-full h-full object-cover opacity-80" onerror="this.src='https://placehold.co/600x600/050b18/00e5ff?text=ARK+LABS+SYSTEM'">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div class="z-10 relative w-full max-w-lg aspect-square bg-slate-900/20 rounded-[2rem] border border-white/10 flex items-center justify-center overflow-hidden shadow-2xl backdrop-blur-md group">
+                    <!-- Placeholder using Azure palette -->
+                    <img src="https://via.placeholder.com/800x800/020617/3B82F6?text=AUTONOMOUS+LOGIC+SIM" alt="ARK Labs Robotic System" class="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-8 left-8 right-8 p-4 glass-card rounded-xl border border-blue-500/20">
+                        <p class="text-[10px] font-mono text-blue-400 font-bold mb-1 uppercase tracking-widest">System Status</p>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
+                            <p class="text-xs text-slate-300 font-semibold tracking-wide">Neural-Core Initialized</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Programs Section -->
-    <section id="programs" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold mb-4">Choose Your <span class="text-cyan-400">ARK Journey</span></h2>
-            <p class="text-slate-400 font-mono uppercase tracking-widest text-sm">Select a learning module powered by IITIANS</p>
+    <section id="programs" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+            <h2 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">Choose Your <span class="text-blue-500">ARK Journey</span></h2>
+            <p class="text-slate-500 font-mono font-bold uppercase tracking-[0.25em] text-xs">Technical pathways for aspiring engineers</p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8 items-stretch">
+        <div class="grid md:grid-cols-3 gap-10 items-stretch">
             <!-- Explorer Mode -->
-            <div class="glass-card p-8 rounded-xl flex flex-col group border-t-4 border-t-cyan-500">
-                <div class="flex justify-between items-start mb-6">
-                    <div class="w-12 h-12 rounded bg-cyan-500/20 flex items-center justify-center text-cyan-400">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <div class="glass-card p-10 rounded-3xl flex flex-col group border-t-4 border-t-blue-500">
+                <div class="flex justify-between items-start mb-8">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                         </svg>
                     </div>
-                    <span class="badge bg-cyan-500/20 text-cyan-400">Program 01</span>
+                    <span class="badge bg-blue-500/10 text-blue-400">MOD-01</span>
                 </div>
-                <h3 class="text-2xl font-bold mb-2 uppercase">Explorer Mode</h3>
-                <p class="text-slate-400 text-sm mb-6 flex-grow">A high-impact introductory experience focused on curiosity and exposure.</p>
+                <h3 class="text-2xl font-extrabold mb-3 uppercase tracking-tight">Explorer Mode</h3>
+                <p class="text-slate-400 text-sm mb-8 flex-grow leading-relaxed font-medium">Exposure to high-level robotics and industrial logic for beginners.</p>
                 
-                <ul class="space-y-3 mb-8 text-sm font-mono text-slate-300">
-                    <li class="flex items-center gap-2">
-                        <span class="text-cyan-400">▶</span> 3-Hour Experience
+                <ul class="space-y-4 mb-10 text-sm font-medium text-slate-300">
+                    <li class="flex items-center gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div> 3-Hour Interactive Session
                     </li>
-                    <li class="flex items-center gap-2">
-                        <span class="text-cyan-400">▶</span> IITian Mentorship
+                    <li class="flex items-center gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div> Live Systems Demo
                     </li>
-                    <li class="flex items-center gap-2">
-                        <span class="text-cyan-400">▶</span> Live Robot Demos
+                    <li class="flex items-center gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div> Concept Familiarization
                     </li>
-                    <li class="flex items-center gap-2 text-cyan-400">
-                        <span class="text-cyan-400 font-bold font-sans">Capacity: 50 Students</span>
+                    <li class="flex items-center gap-3 text-blue-400 font-bold">
+                        <div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div> Group Size: 50 Students
                     </li>
                 </ul>
 
-                <button onclick="selectProgram('Explorer Mode')" class="w-full py-3 rounded text-center bg-cyan-500 text-black font-bold uppercase transition-all shadow-[0_0_15px_rgba(0,229,255,0.2)] hover:scale-105">
+                <button onclick="selectProgram('Explorer Mode')" class="w-full py-4 rounded-xl text-center bg-blue-600 text-white font-extrabold uppercase text-xs tracking-widest transition-all shadow-lg shadow-blue-500/10 hover:bg-blue-500 active:scale-95">
                     Enquire Now
                 </button>
             </div>
 
             <!-- Builder Mode -->
-            <div class="glass-card p-8 rounded-xl flex flex-col group border-t-4 border-t-emerald-500 md:scale-105 relative z-10 shadow-2xl">
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-black text-[10px] font-bold px-4 py-1 rounded-full font-mono uppercase">
-                    Most Popular
+            <div class="glass-card p-10 rounded-3xl flex flex-col group border-t-4 border-t-cyan-500 md:scale-105 relative z-10 shadow-2xl">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-cyan-600 text-white text-[11px] font-bold px-6 py-1.5 rounded-full font-mono uppercase tracking-widest">
+                    Recommended
                 </div>
-                <div class="flex justify-between items-start mb-6">
-                    <div class="w-12 h-12 rounded bg-emerald-500/20 flex items-center justify-center text-emerald-400">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <div class="flex justify-between items-start mb-8">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
                         </svg>
                     </div>
-                    <span class="badge bg-emerald-500/20 text-emerald-400">Program 02</span>
+                    <span class="badge bg-cyan-500/10 text-cyan-400">MOD-02</span>
                 </div>
-                <h3 class="text-2xl font-bold mb-2 uppercase">Builder Mode</h3>
-                <p class="text-slate-400 text-sm mb-6 flex-grow">Intensive workshop where students assemble and program their first autonomous robot.</p>
+                <h3 class="text-2xl font-extrabold mb-3 uppercase tracking-tight">Builder Mode</h3>
+                <p class="text-slate-400 text-sm mb-8 flex-grow leading-relaxed font-medium">Intensive hands-on workshop focused on autonomous robot assembly and logic coding.</p>
                 
-                <ul class="space-y-3 mb-8 text-sm font-mono text-slate-300">
-                    <li class="flex items-center gap-2">
-                        <span class="text-emerald-400">▶</span> Theory + Practical
+                <ul class="space-y-4 mb-10 text-sm font-medium text-slate-300">
+                    <li class="flex items-center gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-cyan-500"></div> Assembly + Programming
                     </li>
-                    <li class="flex items-center gap-2">
-                        <span class="text-emerald-400">▶</span> IITian Mentorship
+                    <li class="flex items-center gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-cyan-500"></div> Individual Hardware Kits
                     </li>
-                    <li class="flex items-center gap-2">
-                        <span class="text-emerald-400">▶</span> Guided Kit Assembly
+                    <li class="flex items-center gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-cyan-500"></div> Debugging Exercises
                     </li>
-                    <li class="flex items-center gap-2 text-emerald-400">
-                        <span class="text-emerald-400 font-bold font-sans">Capacity: 50 Students</span>
+                    <li class="flex items-center gap-3 text-cyan-400 font-bold">
+                        <div class="w-1.5 h-1.5 rounded-full bg-cyan-500"></div> Guided by IIT Experts
                     </li>
                 </ul>
 
-                <button onclick="selectProgram('Builder Mode')" class="w-full py-3 rounded text-center bg-cyan-500 text-black font-bold uppercase transition-all shadow-[0_0_15px_rgba(0,229,255,0.2)] hover:scale-105">
+                <button onclick="selectProgram('Builder Mode')" class="w-full py-4 rounded-xl text-center bg-blue-600 text-white font-extrabold uppercase text-xs tracking-widest transition-all shadow-lg shadow-blue-500/10 hover:bg-blue-500 active:scale-95">
                     Enquire Now
                 </button>
             </div>
 
             <!-- Engineer Mode -->
-            <div class="glass-card p-8 rounded-xl flex flex-col group border-t-4 border-t-rose-500">
-                <div class="flex justify-between items-start mb-6">
-                    <div class="w-12 h-12 rounded bg-rose-500/20 flex items-center justify-center text-rose-400">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <div class="glass-card p-10 rounded-3xl flex flex-col group border-t-4 border-t-slate-500">
+                <div class="flex justify-between items-start mb-8">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-800 flex items-center justify-center text-slate-300">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>
                         </svg>
                     </div>
-                    <span class="badge bg-rose-500/20 text-rose-400">Program 03</span>
+                    <span class="badge bg-slate-800 text-slate-400">MOD-03</span>
                 </div>
-                <h3 class="text-2xl font-bold mb-2 uppercase">Engineer Mode</h3>
-                <p class="text-slate-400 text-sm mb-6 flex-grow">Advanced series covering interconnected systems and complex logic flow.</p>
+                <h3 class="text-2xl font-extrabold mb-3 uppercase tracking-tight">Engineer Mode</h3>
+                <p class="text-slate-400 text-sm mb-8 flex-grow leading-relaxed font-medium">Advanced curriculum covering IoT, sensor fusion, and complex system architectures.</p>
                 
-                <ul class="space-y-3 mb-8 text-sm font-mono text-slate-300">
-                    <li class="flex items-center gap-2">
-                        <span class="text-rose-400">▶</span> 6 Interlinked Projects
+                <ul class="space-y-4 mb-10 text-sm font-medium text-slate-300">
+                    <li class="flex items-center gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-slate-500"></div> Interconnected Systems
                     </li>
-                    <li class="flex items-center gap-2">
-                        <span class="text-rose-400">▶</span> IITian Mentorship
+                    <li class="flex items-center gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-slate-500"></div> Cloud-Ready Controllers
                     </li>
-                    <li class="flex items-center gap-2">
-                        <span class="text-rose-400">▶</span> Mission-Based Learning
+                    <li class="flex items-center gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-slate-500"></div> Advanced Project Cycle
                     </li>
-                    <li class="flex items-center gap-2 text-rose-400">
-                        <span class="text-rose-400 font-bold font-sans">Capacity: 40 Students</span>
+                    <li class="flex items-center gap-3 text-slate-400 font-bold">
+                        <div class="w-1.5 h-1.5 rounded-full bg-slate-500"></div> Career Path Guidance
                     </li>
                 </ul>
 
-                <button onclick="selectProgram('Engineer Mode')" class="w-full py-3 rounded text-center bg-cyan-500 text-black font-bold uppercase transition-all shadow-[0_0_15px_rgba(0,229,255,0.2)] hover:scale-105">
+                <button onclick="selectProgram('Engineer Mode')" class="w-full py-4 rounded-xl text-center bg-blue-600 text-white font-extrabold uppercase text-xs tracking-widest transition-all shadow-lg shadow-blue-500/10 hover:bg-blue-500 active:scale-95">
                     Enquire Now
                 </button>
             </div>
@@ -332,134 +390,108 @@
     </section>
 
     <!-- Project Inventory Section -->
-    <section id="inventory" class="py-24 bg-black/40 border-y border-white/5 relative">
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
-        
+    <section id="inventory" class="py-32 bg-slate-950/50 border-y border-white/5 relative">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                <div>
-                    <h2 class="text-4xl font-bold mb-2">Project <span class="text-cyan-400">Inventory</span></h2>
-                    <p class="text-slate-500 font-mono">Total Database: 25 Projects Loaded</p>
-                </div>
-                <div class="flex gap-2">
-                    <button class="px-4 py-1 text-xs font-mono bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 rounded">ALL</button>
-                    <button class="px-4 py-1 text-xs font-mono text-slate-400 border border-white/10 rounded hover:bg-white/5">BEGINNER</button>
-                    <button class="px-4 py-1 text-xs font-mono text-slate-400 border border-white/10 rounded hover:bg-white/5">ADVANCED</button>
-                </div>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Technical <span class="text-blue-500">Portfolio</span></h2>
+                <p class="text-slate-500 font-mono font-bold uppercase tracking-[0.2em] text-[11px]">Exploring 25+ Specialized Modules</p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" id="projectGrid">
+            <!-- Project Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="projectGrid">
                 <!-- Projects injected by JS -->
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24 px-6 max-w-5xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div class="glass-card p-1 rounded-2xl">
-                <div class="bg-black/80 rounded-2xl p-8 border border-white/10">
-                    <h4 class="text-cyan-400 font-mono text-xs uppercase mb-4 tracking-widest uppercase">Why ARK Labs?</h4>
-                    <div class="space-y-6">
-                        <div class="flex gap-4">
-                            <div class="w-10 h-10 shrink-0 rounded bg-cyan-500/10 flex items-center justify-center text-cyan-400 font-bold">1</div>
+    <section id="about" class="py-32 px-6 max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-20 items-center">
+            <div class="glass-card p-1 rounded-[2.5rem]">
+                <div class="bg-slate-900/60 rounded-[2.5rem] p-10 border border-white/5">
+                    <h4 class="text-blue-500 font-mono text-[11px] uppercase mb-8 tracking-[0.2em] font-bold">Our Philosophy</h4>
+                    <div class="space-y-10">
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 shrink-0 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 font-bold">1</div>
                             <div>
-                                <h5 class="font-bold mb-1">By IITians</h5>
-                                <p class="text-sm text-slate-400">Mentors from IIT Patna with real-world exposure to autonomous systems.</p>
+                                <h5 class="font-heading font-bold text-lg mb-2">IIT Patna Expertise</h5>
+                                <p class="text-sm text-slate-400 font-medium">Curriculum developed and delivered by researchers and engineers from India's premier institutes.</p>
                             </div>
                         </div>
-                        <div class="flex gap-4">
-                            <div class="w-10 h-10 shrink-0 rounded bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold">2</div>
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 shrink-0 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 font-bold">2</div>
                             <div>
-                                <h5 class="font-bold mb-1">NEP 2020 Aligned</h5>
-                                <p class="text-sm text-slate-400">Designed to meet modern educational standards for experiential learning.</p>
+                                <h5 class="font-heading font-bold text-lg mb-2">Industry Alignment</h5>
+                                <p class="text-sm text-slate-400 font-medium">We focus on skills that translate to modern fields: AI, Automation, and Electronics.</p>
                             </div>
                         </div>
-                        <div class="flex gap-4">
-                            <div class="w-10 h-10 shrink-0 rounded bg-rose-500/10 flex items-center justify-center text-rose-400 font-bold">3</div>
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 shrink-0 rounded-2xl bg-slate-700/20 flex items-center justify-center text-slate-400 font-bold">3</div>
                             <div>
-                                <h5 class="font-bold mb-1">Concept-First Approach</h5>
-                                <p class="text-sm text-slate-400">Emphasis on understanding "Why" rather than just rote assembly of kits.</p>
+                                <h5 class="font-heading font-bold text-lg mb-2">First-Principles Logic</h5>
+                                <p class="text-sm text-slate-400 font-medium">Moving beyond simple assembly to deep mathematical and logical understanding of robotics.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div>
-                <h2 class="text-3xl font-bold mb-6 italic">"This is not boring tuition, <span class="text-cyan-400">this is engineering."</span></h2>
-                <p class="text-slate-400 mb-8 leading-relaxed">
-                    Our curriculum bridges the gap between classroom theory and industry practice. Students don't just follow instructions; they learn logic, debugging, and system-level thinking from experts.
+                <h2 class="text-4xl font-extrabold mb-8 italic leading-tight tracking-tight">"A professional introduction to <br/><span class="text-blue-500">Real Engineering."</span></h2>
+                <p class="text-lg text-slate-400 mb-10 leading-relaxed font-medium">
+                    ARK Labs is designed to bridge the gap between textbook physics and practical execution. Students learn system architecture, code optimization, and industrial-grade troubleshooting.
                 </p>
-                <div class="p-6 border-l-2 border-cyan-500 bg-cyan-500/5">
-                    <p class="text-sm text-slate-300 italic">"Aligned with the experiential learning objectives outlined in the National Education Policy (NEP) 2020, focusing on integrated science and mathematics."</p>
+                <div class="p-8 border-l-4 border-blue-600 bg-blue-600/5 rounded-r-2xl">
+                    <p class="text-base text-slate-300 italic font-medium">"Strictly aligned with NEP 2020 experiential learning standards to foster critical thinking and STEM literacy."</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Brochure CTA Section -->
-    <section class="py-24 px-6 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-t from-cyan-900/20 to-transparent"></div>
-        <div class="max-w-4xl mx-auto text-center relative z-10 border border-white/10 rounded-3xl p-12 glass-card">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6 uppercase">Bring <span class="text-cyan-400">ARK Labs</span> to Your School</h2>
-            <p class="text-xl text-slate-400 mb-10">Hands-on | Interactive | Future-ready | By IITIANS</p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="document.getElementById('enquiry-form').scrollIntoView({behavior: 'smooth'})" class="px-10 py-4 bg-cyan-500 text-black font-bold font-orbitron rounded shadow-lg uppercase hover:scale-105 transition-transform">School Registration</button>
-                <button class="px-10 py-4 bg-white/5 border border-white/20 font-bold font-orbitron rounded hover:bg-white/10 uppercase transition-colors">Download Brochure</button>
-            </div>
-            <p class="mt-8 text-xs font-mono text-slate-500 uppercase tracking-widest">Available for Classes VIII to X</p>
         </div>
     </section>
 
     <!-- Enquiry Form Section -->
-    <section id="enquiry-form" class="py-24 px-6 relative overflow-hidden bg-cyan-500/5">
-        <div class="max-w-3xl mx-auto text-center relative z-10 border border-white/10 rounded-3xl p-12 glass-card">
-            <h2 class="text-4xl font-bold mb-6">Program <span class="text-cyan-400">Enquiry</span></h2>
-            <p class="text-slate-400 mb-10">Connect with our IITian mentors to bring ARK Labs to your campus.</p>
+    <section id="enquiry-form" class="py-32 px-6 relative overflow-hidden bg-blue-900/5">
+        <div class="max-w-4xl mx-auto text-center relative z-10 border border-white/5 rounded-[3rem] p-16 glass-card">
+            <h2 class="text-4xl font-extrabold mb-6 tracking-tight">Technical <span class="text-blue-500">Enquiry</span></h2>
+            <p class="text-slate-400 mb-12 font-medium">Register your school or organization for an ARK Labs workshop.</p>
             
-            <form id="submissionForm" class="space-y-6 text-left">
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-mono text-cyan-400 uppercase pl-1 tracking-widest">Full Name</label>
-                        <input type="text" name="name" placeholder="Name" required class="w-full bg-black/50 border border-white/10 rounded p-3 text-sm focus:border-cyan-400 outline-none">
+            <form id="submissionForm" class="space-y-8 text-left">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-mono text-blue-500 uppercase pl-1 tracking-widest font-bold">Full Name</label>
+                        <input type="text" name="name" placeholder="John Doe" required class="w-full bg-slate-900/40 border border-white/10 rounded-xl p-4 text-sm focus:border-blue-500 outline-none text-slate-200">
                     </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-mono text-cyan-400 uppercase pl-1 tracking-widest">Email Address</label>
-                        <input type="email" name="email" placeholder="school@gmail.com" required class="w-full bg-black/50 border border-white/10 rounded p-3 text-sm focus:border-cyan-400 outline-none">
-                    </div>
-                </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-mono text-cyan-400 uppercase pl-1 tracking-widest">Phone Number</label>
-                        <!-- Ensuring the name is exactly 'phone' for your script -->
-                        <input type="tel" name="phone" placeholder="+91 98765-43210" required class="w-full bg-black/50 border border-white/10 rounded p-3 text-sm focus:border-cyan-400 outline-none">
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-mono text-cyan-400 uppercase pl-1 tracking-widest">School Name</label>
-                        <input type="text" name="school" placeholder="E.g. IITP" required class="w-full bg-black/50 border border-white/10 rounded p-3 text-sm focus:border-cyan-400 outline-none">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-mono text-blue-500 uppercase pl-1 tracking-widest font-bold">Work Email</label>
+                        <input type="email" name="email" placeholder="john@institution.edu" required class="w-full bg-slate-900/40 border border-white/10 rounded-xl p-4 text-sm focus:border-blue-500 outline-none text-slate-200">
                     </div>
                 </div>
-                <div class="space-y-1">
-                    <label class="text-[10px] font-mono text-cyan-400 uppercase pl-1 tracking-widest">Interested Program (Module)</label>
-                    <!-- Renamed 'program' to 'module' for better mapping in Google Sheets -->
-                    <select id="programSelect" name="module" required class="w-full bg-black/50 border border-white/10 rounded p-3 text-sm focus:border-cyan-400 outline-none appearance-none custom-select cursor-pointer">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-mono text-blue-500 uppercase pl-1 tracking-widest font-bold">Contact Number</label>
+                        <input type="tel" name="phone" placeholder="+91" required class="w-full bg-slate-900/40 border border-white/10 rounded-xl p-4 text-sm focus:border-blue-500 outline-none text-slate-200">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-mono text-blue-500 uppercase pl-1 tracking-widest font-bold">School/Institution</label>
+                        <input type="text" name="school" required class="w-full bg-slate-900/40 border border-white/10 rounded-xl p-4 text-sm focus:border-blue-500 outline-none text-slate-200">
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-mono text-blue-500 uppercase pl-1 tracking-widest font-bold">Select Pathway</label>
+                    <select id="programSelect" name="module" required class="w-full bg-slate-900/40 border border-white/10 rounded-xl p-4 text-sm focus:border-blue-500 outline-none appearance-none custom-select cursor-pointer text-slate-200">
                         <option value="">-- Choose Module --</option>
-                        <option value="Explorer Mode">Explorer Mode (3-Hour Intro)</option>
-                        <option value="Builder Mode">Builder Mode (Intensive Workshop)</option>
-                        <option value="Engineer Mode">Engineer Mode (Advanced Series)</option>
-                        <option value="General Inquiry">General / Other Inquiry</option>
+                        <option value="Explorer Mode">Explorer Mode (Orientation)</option>
+                        <option value="Builder Mode">Builder Mode (Workshop)</option>
+                        <option value="Engineer Mode">Engineer Mode (Advanced)</option>
+                        <option value="Other">General Partnership</option>
                     </select>
                 </div>
-                <div class="space-y-1">
-                    <label class="text-[10px] font-mono text-cyan-400 uppercase pl-1 tracking-widest">Additional Details (Reason)</label>
-                    <!-- Renamed 'message' to 'reason' as requested -->
-                    <textarea name="reason" rows="4" placeholder="How can we help your students?" required class="w-full bg-black/50 border border-white/10 rounded p-3 text-sm focus:border-cyan-400 outline-none"></textarea>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-mono text-blue-500 uppercase pl-1 tracking-widest font-bold">Additional Details</label>
+                    <textarea name="reason" rows="4" placeholder="Briefly describe your requirements..." required class="w-full bg-slate-900/40 border border-white/10 rounded-xl p-4 text-sm focus:border-blue-500 outline-none text-slate-200"></textarea>
                 </div>
                 
-                <button type="submit" id="submitBtn" class="w-full py-4 bg-cyan-500 text-black font-bold font-orbitron rounded shadow-lg uppercase hover:scale-[1.01] transition-transform flex items-center justify-center gap-2">
-                    <span id="btnText">Send Enquiry</span>
-                    <div id="loadingSpinner" class="hidden w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></div>
+                <button type="submit" id="submitBtn" class="w-full py-5 bg-blue-600 text-white font-extrabold uppercase text-sm tracking-[0.2em] rounded-2xl shadow-2xl shadow-blue-500/20 active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+                    <span id="btnText">Submit Request</span>
+                    <div id="loadingSpinner" class="hidden w-5 h-5 border-3 border-white/20 border-t-white rounded-full animate-spin"></div>
                 </button>
 
                 <div id="formStatus" class="form-message"></div>
@@ -468,109 +500,110 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-white/5 px-6">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-2">
-                <div class="w-6 h-6 rounded border border-cyan-400/50 flex items-center justify-center">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-cyan-400/50">
+    <footer class="py-16 border-t border-white/5 px-6 bg-slate-950">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg border border-blue-500/30 flex items-center justify-center">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-blue-500/50">
                         <path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect>
                     </svg>
                 </div>
                 <div>
-                    <span class="font-orbitron font-bold text-sm tracking-tighter opacity-50 block leading-none">ARK <span class="text-cyan-400">Labs</span></span>
-                    <span class="text-[8px] font-mono text-cyan-500/40 tracking-widest leading-none uppercase">By IITians</span>
+                    <span class="logo-text font-extrabold text-lg tracking-tight opacity-70 block leading-none uppercase">ARK <span class="text-blue-500">Labs</span></span>
+                    <span class="text-[9px] font-mono text-blue-400/40 font-bold tracking-widest leading-none uppercase mt-1 block">IIT Patna Network</span>
                 </div>
             </div>
-            <p class="text-slate-500 text-xs font-mono uppercase">© 2024 ARK Labs Mentorship Program. All Rights Reserved.</p>
-            <div class="flex gap-4">
-                <div class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-slate-500 hover:text-cyan-400 hover:border-cyan-400 transition-all cursor-pointer">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+            <p class="text-slate-500 text-xs font-mono font-bold uppercase tracking-widest">© 2024 ARK Labs Robotics Program. All Rights Reserved.</p>
+            <div class="flex gap-5">
+                <div class="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-slate-500 hover:text-blue-500 hover:border-blue-500 transition-all cursor-pointer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
                 </div>
-                <div class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-slate-500 hover:text-cyan-400 hover:border-cyan-400 transition-all cursor-pointer">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <div class="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-slate-500 hover:text-blue-400 hover:border-blue-400 transition-all cursor-pointer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Project Database
+        // Project Database (same logic, updated visuals)
         const projects = [
-            { name: "Obstacle Detect", unit: "01", level: "Beginner", icon: "sensor" },
-            { name: "Water Pump", unit: "02", level: "Beginner", icon: "motor" },
-            { name: "Bluetooth Bot", unit: "03", level: "Intermediate", icon: "bt" },
-            { name: "Avoidance AI", unit: "04", level: "Intermediate", icon: "chip" },
-            { name: "Line Follower", unit: "05", level: "Intermediate", icon: "sensor" },
-            { name: "Keypad Lock", unit: "06", level: "Intermediate", icon: "key" },
-            { name: "Smart Dustbin", unit: "07", level: "Beginner", icon: "sensor" },
-            { name: "Touch Switch", unit: "08", level: "Beginner", icon: "sensor" },
-            { name: "Ultrasonic Sonar", unit: "09", level: "Beginner", icon: "sonar" },
-            { name: "Spy Robot", unit: "10", level: "Advanced", icon: "camera" },
-            { name: "LED Blinker", unit: "11", level: "Beginner", icon: "light" },
-            { name: "Buzzer Alarm", unit: "12", level: "Beginner", icon: "sound" },
-            { name: "Traffic Light", unit: "13", level: "Beginner", icon: "light" },
-            { name: "Automatic Lamp", unit: "14", level: "Beginner", icon: "sensor" },
-            { name: "IR Remote Bot", unit: "15", level: "Intermediate", icon: "bt" },
-            { name: "Temp Alert", unit: "16", level: "Intermediate", icon: "temp" },
-            { name: "Smart Door", unit: "17", level: "Intermediate", icon: "key" },
-            { name: "Gesture Control", unit: "18", level: "Advanced", icon: "sensor" },
-            { name: "Delivery Bot", unit: "19", level: "Advanced", icon: "box" },
-            { name: "Surveillance Rover", unit: "20", level: "Advanced", icon: "camera" },
-            { name: "Modular System", unit: "21", level: "Advanced", icon: "chip" },
-            { name: "Factory Sim", unit: "22", level: "Advanced", icon: "gear" }
+            { name: "Obstacle Detect", icon: "sensor", detail: "Real-time navigation using IR and obstacle avoidance logic." },
+            { name: "Water Pump", icon: "motor", detail: "Automated precision irrigation triggered by moisture flux." },
+            { name: "Bluetooth Bot", icon: "bt", detail: "Smartphone-controlled wireless navigation systems." },
+            { name: "Avoidance AI", icon: "chip", detail: "Complex escape pathfinding and autonomous exploration." },
+            { name: "Line Follower", icon: "sensor", detail: "High-precision PID tracking for logistics automation simulation." },
+            { name: "Keypad Lock", icon: "key", detail: "Digital security systems with multi-factor authentication logic." },
+            { name: "Smart Dustbin", icon: "sensor", detail: "Automated lid-control using distance proximity sensors." },
+            { name: "Touch Switch", icon: "sensor", detail: "Capacitive interface design for modern industrial controls." },
+            { name: "Ultrasonic Sonar", icon: "sonar", detail: "2D spatial mapping using acoustic wave telemetry." },
+            { name: "Spy Robot", icon: "camera", detail: "Remote tactical unit with real-time video transmission." },
+            { name: "LED PWM", icon: "light", detail: "Pulse Width Modulation for efficient power control." },
+            { name: "Buzzer Logic", icon: "sound", detail: "Frequency-based alert protocols and signal processing." },
+            { name: "Traffic Flow", icon: "light", detail: "State-machine logic for urban throughput management." },
+            { name: "Light Sensing", icon: "sensor", detail: "Energy-harvesting simulation via LDR-based illumination." },
+            { name: "IR Decode", icon: "bt", detail: "Signal protocol decoding for infrared remote interfaces." },
+            { name: "Thermal Safety", icon: "temp", detail: "Environmental monitoring with emergency failsafe logic." },
+            { name: "Smart Entry", icon: "key", detail: "Motor-driven physical security and access management." },
+            { name: "Motion Control", icon: "sensor", detail: "Kinetic-based navigation using 3-axis accelerometer data." },
+            { name: "Logistic Bot", icon: "box", detail: "Autonomous transport unit with load-balancing stability." },
+            { name: "Terrain Rover", icon: "camera", detail: "All-terrain exploration with environmental data logging." },
+            { name: "Modular Architecture", icon: "chip", detail: "Universal robotic core for rapid subsystem swappability." },
+            { name: "Automation Sim", icon: "gear", detail: "End-to-end industrial manufacturing workflow logic." }
         ];
 
         const grid = document.getElementById('projectGrid');
 
         const icons = {
-            sensor: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>`,
-            motor: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8M8 12h8"></path></svg>`,
-            chip: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M7 3v4M11 3v4M15 3v4M7 17v4M11 17v4M15 17v4M3 7h4M3 11h4M3 15h4M17 7h4M17 11h4M17 15h4"></path></svg>`,
-            bt: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 7 10 10-5 5V2l5 5L7 17"></path></svg>`,
-            sonar: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12a10 10 0 0 1 10-10M2 12a10 10 0 0 0 10 10M5 12a7 7 0 0 1 7-7M5 12a7 7 0 0 0 7 7M8 12a4 4 0 0 1 4-4M8 12a4 4 0 0 0 4 4M11 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"></path></svg>`,
-            camera: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>`,
-            light: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>`,
-            sound: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>`,
-            key: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3m-3-3l-2.5-2.5"></path></svg>`,
-            temp: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"></path></svg>`,
-            box: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="M3.27 6.96 12 12.01l8.73-5.05"></path><path d="M12 22.08V12"></path></svg>`,
-            gear: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.72V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.17a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>`
+            sensor: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>`,
+            motor: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8M8 12h8"></path></svg>`,
+            chip: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M7 3v4M11 3v4M15 3v4M7 17v4M11 17v4M15 17v4M3 7h4M3 11h4M3 15h4M17 7h4M17 11h4M17 15h4"></path></svg>`,
+            bt: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 7 10 10-5 5V2l5 5L7 17"></path></svg>`,
+            sonar: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12a10 10 0 0 1 10-10M2 12a10 10 0 0 0 10 10M5 12a7 7 0 0 1 7-7M5 12a7 7 0 0 0 7 7M8 12a4 4 0 0 1 4-4M8 12a4 4 0 0 0 4 4M11 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"></path></svg>`,
+            camera: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>`,
+            light: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>`,
+            sound: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>`,
+            key: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3m-3-3l-2.5-2.5"></path></svg>`,
+            temp: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"></path></svg>`,
+            box: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="M3.27 6.96 12 12.01l8.73-5.05"></path><path d="M12 22.08V12"></path></svg>`,
+            gear: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.72V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.17a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>`
         };
 
         // Inject Inventory
         projects.forEach(p => {
             const card = document.createElement('div');
-            card.className = "project-grid-item glass-card p-4 rounded-lg flex flex-col gap-3 group";
+            card.className = "project-grid-item glass-card p-8 rounded-3xl flex flex-col gap-5 group";
             card.innerHTML = `
-                <div class="flex justify-between items-start">
-                    <div class="text-cyan-400 group-hover:scale-110 transition-transform">${icons[p.icon] || icons.chip}</div>
-                    <span class="text-[10px] font-mono text-slate-500">U_${p.unit}</span>
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 rounded-xl bg-blue-500/10 text-blue-400 group-hover:scale-110 transition-transform">
+                        ${icons[p.icon] || icons.chip}
+                    </div>
+                    <h4 class="text-[15px] font-extrabold uppercase tracking-tight group-hover:text-blue-400 transition-colors">${p.name}</h4>
                 </div>
-                <div>
-                    <h4 class="text-xs font-bold uppercase group-hover:text-cyan-400 transition-colors">${p.name}</h4>
-                    <p class="text-[9px] font-mono text-slate-500 mt-1 uppercase">${p.level}</p>
+                <p class="text-[13px] text-slate-400 leading-relaxed font-medium">
+                    ${p.detail}
+                </p>
+                <div class="mt-auto pt-5 border-t border-white/5 flex items-center justify-between">
+                    <span class="text-[9px] font-mono text-blue-400/60 font-bold uppercase tracking-widest">ARK MODULE</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="text-blue-500/0 group-hover:text-blue-500/100 transition-all transform translate-x-2 group-hover:translate-x-0"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                 </div>
             `;
             grid.appendChild(card);
         });
 
-        // Redirect & Pre-select Program
+        // Pre-select Function
         function selectProgram(mode) {
             const select = document.getElementById('programSelect');
             const formSection = document.getElementById('enquiry-form');
-            
             select.value = mode;
             formSection.scrollIntoView({behavior: 'smooth'});
             
-            // Highlight the form effect
             const card = formSection.querySelector('.glass-card');
-            card.style.borderColor = 'rgba(0, 229, 255, 0.8)';
-            setTimeout(() => {
-                card.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-            }, 2000);
+            card.style.borderColor = 'rgba(59, 130, 246, 0.8)';
+            setTimeout(() => { card.style.borderColor = 'rgba(255, 255, 255, 0.05)'; }, 2000);
         }
 
-        // Form Submission Logic
+        // Form Submission logic
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzh8Yh6z_OI83NWtCC2FE4IrnwsAf2g0O9JPtaOkxJIR4IftoSmtN_7f0vzmSRuaY1a/exec';
         const form = document.getElementById('submissionForm');
         const submitBtn = document.getElementById('submitBtn');
@@ -580,39 +613,26 @@
 
         form.addEventListener('submit', e => {
             e.preventDefault();
-            
             submitBtn.disabled = true;
-            btnText.innerText = "Transmitting Data...";
+            btnText.innerText = "Synchronizing...";
             spinner.classList.remove('hidden');
             statusMsg.className = "form-message";
 
-            fetch(scriptURL, { 
-                method: 'POST', 
-                body: new FormData(form)
-            })
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
             .then(response => {
-                statusMsg.innerText = "Access Granted! Enquiry received successfully. We'll be in touch.";
+                statusMsg.innerText = "Data received. Our technical team will reach out shortly.";
                 statusMsg.classList.add('success');
                 form.reset();
             })
             .catch(error => {
-                statusMsg.innerText = "Connection lost. Please check your network or reach out via email.";
+                statusMsg.innerText = "Link Failure. Please check your connection.";
                 statusMsg.classList.add('error');
-                console.error('Error!', error.message);
             })
             .finally(() => {
                 submitBtn.disabled = false;
-                btnText.innerText = "Send Enquiry";
+                btnText.innerText = "Submit Request";
                 spinner.classList.add('hidden');
             });
-        });
-
-        grid.addEventListener('click', (e) => {
-            const item = e.target.closest('.project-grid-item');
-            if (item) {
-                item.style.transform = 'scale(0.95)';
-                setTimeout(() => item.style.transform = '', 100);
-            }
         });
     </script>
 </body>
