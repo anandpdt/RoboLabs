@@ -245,6 +245,35 @@
         #codeModal.show {
             display: flex;
         }
+
+        /* --- SLIDER CSS --- */
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 2.5rem;
+        }
+        .slider-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slider-dot.active {
+            background-color: white;
+            width: 1.5rem;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -265,7 +294,6 @@
                     <span class="text-[9px]  text-blue-600 font-bold tracking-[0.2em] uppercase block mt-1">IIT PATNA MENTORS</span>
                 </div>
             </div>
-            <!-- Pricing Link added here -->
             <div class="hidden md:flex ml-auto mr-12 gap-10 text-[11px] font-bold text-slate-600 uppercase tracking-widest">
                 <a href="#about" class="nav-link hover:text-blue-600 transition-colors">Why Us</a>
                 <a href="#programs" class="nav-link hover:text-blue-600 transition-colors">Programs</a>
@@ -344,11 +372,10 @@
                 </div>
             </div>
         </div>
-        <!-- Divider at midpoint -->
         <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
     </section>
 
-    <!-- Why Choose ARK Lab Section (Moved Before Programs) -->
+    <!-- Why Choose ARK Lab Section -->
     <section id="about" class="py-16 px-6 bg-transparent relative">
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-24 reveal">
@@ -383,37 +410,60 @@
                     </div>
                 </div>
 
+                <!-- Engineering Gallery Slider Area -->
                 <div class="relative reveal-right">
-                    <div class="pro-card p-12 rounded-[3rem] border border-white relative shadow-inner overflow-hidden group">
-                        <h3 class="text-4xl md:text-5xl font-bold mb-8 text-slate-900 leading-tight italic">
-                            "This is not <span class="text-blue-600">tuition</span>, <br/>this is engineering."
-                        </h3>
-                        <p class="text-xl text-slate-600 font-medium mb-12 leading-relaxed">
-                            Our curriculum bridges the gap between classroom theory and industry practice. We don't just follow manuals; we learn debugging and system architecture.
-                        </p>
-                        <div class="flex items-center gap-6 p-4 bg-white/60 backdrop-blur-md rounded-2xl border border-white/50 shadow-sm transition-transform hover:scale-105 duration-300">
-                            <div class="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg animate-pulse">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20"/><path d="m17 7 5 5-5 5M7 7l-5 5 5 5"/></svg>
+                    <!-- NEW: Heading Box above slider -->
+                    <div class="mb-6 pro-card py-4 px-8 rounded-2xl border border-blue-100 flex items-center justify-center">
+                        <h4 class="text-xl md:text-2xl font-bold text-slate-800 text-center">
+                            "Engineering Thinking starts early"
+                        </h4>
+                    </div>
+
+                    <!-- Moved slightly below (added mt-4) -->
+                    <div class="pro-card p-0 rounded-[3rem] border border-white relative shadow-inner overflow-hidden group h-[400px] md:h-[500px] mt-4">
+                        <div class="slider-wrapper">
+                            <div class="slider-track" id="sliderTrack">
+                                <div class="slide"><img src="1.png" alt="ARK Engineering 1" onerror="this.src='https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1000'"></div>
+                                <div class="slide"><img src="2.jpg" alt="ARK Engineering 2" onerror="this.src='https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&q=80&w=1000'"></div>
+                                <div class="slide"><img src="3.jpg" alt="ARK Engineering 3" onerror="this.src='https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000'"></div>
+                                <div class="slide"><img src="4.jpg" alt="ARK Engineering 4" onerror="this.src='https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&q=80&w=1000'"></div>
                             </div>
-                            <div>
-                                <p class="font-bold text-slate-900 text-lg">IIT Patna Core Team</p>
-                                <p class="text-sm text-blue-600 font-mono font-bold tracking-widest uppercase">Experiential Learning Experts</p>
+                            
+                            <div class="absolute inset-0 flex items-center justify-between px-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <button onclick="prevSlide()" class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-xl border border-white/30 text-white flex items-center justify-center hover:bg-white hover:text-blue-600 transition-all">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m15 18-6-6 6-6"/></svg>
+                                </button>
+                                <button onclick="nextSlide()" class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-xl border border-white/30 text-white flex items-center justify-center hover:bg-white hover:text-blue-600 transition-all">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
+                                </button>
+                            </div>
+
+                            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+                                <button onclick="goToSlide(0)" class="slider-dot w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all hover:bg-white"></button>
+                                <button onclick="goToSlide(1)" class="slider-dot w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all hover:bg-white"></button>
+                                <button onclick="goToSlide(2)" class="slider-dot w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all hover:bg-white"></button>
+                                <button onclick="goToSlide(3)" class="slider-dot w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all hover:bg-white"></button>
+                            </div>
+                            
+                            <div class="absolute top-6 left-6 pointer-events-none">
+                                <div class="bg-blue-600/90 backdrop-blur-md text-white text-[10px] font-bold px-4 py-1.5 rounded-full font-mono uppercase tracking-[0.2em] shadow-lg">
+                                    Engineering Lab
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Divider at midpoint -->
         <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
     </section>
 
+    <!-- Program Sections -->
     <section id="programs" class="py-16 px-6 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20 reveal">
                 <h2 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight text-slate-900">Choose Your <span class="gradient-text">ARK Journey</span></h2>
             </div>
-
             <div class="grid md:grid-cols-3 gap-10 items-stretch" id="programsGrid">
                 <!-- Program 1 -->
                 <div class="pro-card p-10 rounded-[2.5rem] flex flex-col group stagger-item">
@@ -436,7 +486,6 @@
                             <svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2m16 0h2m-7-1v2m-6-2v2"/></svg>
                             Experience pre-made projects
                         </li>
-                       
                         <li class="flex items-center gap-3 text-blue-600">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             Capacity: 50 Students
@@ -471,7 +520,6 @@
                             <svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>
                             Two mini projects
                         </li>
-                       
                         <li class="flex items-center gap-3 text-blue-600 font-bold">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             Capacity: 50 Students
@@ -495,7 +543,6 @@
                     <h3 class="text-2xl font-bold mb-3 text-slate-900 group-hover:text-indigo-600 transition-colors">Engineer Pack</h3>
                     <p class="text-slate-600 text-sm mb-8 flex-grow leading-relaxed font-medium">Advanced series covering interconnected systems and complex logic flow.</p>
                     <ul class="space-y-4 mb-10 text-sm font-semibold text-slate-700">
-                       
                         <li class="flex items-center gap-3">
                             <svg class="w-4 h-4 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
                              Theory + Advanced Practical
@@ -504,7 +551,6 @@
                             <svg class="w-4 h-4 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
                             6 Interlinked Projects
                         </li>
-                       
                         <li class="flex items-center gap-3 text-indigo-600 font-bold">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             Capacity: 40 Students
@@ -516,7 +562,6 @@
                 </div>
             </div>
         </div>
-        <!-- Divider at midpoint -->
         <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
     </section>
 
@@ -527,13 +572,13 @@
             <p class="text-xl text-slate-600 mb-12 font-medium">Hands-on | Interactive | Future-ready | By IITIANS</p>
             <div class="flex flex-col sm:flex-row gap-5 justify-center">
                 <button onclick="revealAndScrollToForm()" class="px-12 py-5 bg-blue-600 text-white font-bold text-sm rounded-2xl shadow-xl shadow-blue-600/30 uppercase tracking-widest hover:scale-105 hover:bg-blue-700 transition-all">School Registration</button>
-                <!-- See Pricing button added here -->
-                <button onclick="openPricingModal()" class="px-12 py-5 bg-white/40 border border-white/80 font-bold text-sm rounded-2xl hover:bg-white uppercase tracking-widest transition-all text-slate-700 hover:scale-105">See Pricing</button>
-                <button class="px-12 py-5 bg-white/40 border border-white/80 font-bold text-sm rounded-2xl hover:bg-white uppercase tracking-widest transition-all text-slate-700 hover:scale-105">Download Brochure</button>
+                
+                <!-- NEW: Coloured buttons for Pricing and Brochure -->
+                <button onclick="openPricingModal()" class="px-12 py-5 bg-slate-900 text-white font-bold text-sm rounded-2xl hover:bg-blue-600 uppercase tracking-widest transition-all shadow-lg hover:scale-105">See Pricing</button>
+                <button class="px-12 py-5 bg-indigo-600 text-white font-bold text-sm rounded-2xl hover:bg-indigo-700 uppercase tracking-widest transition-all shadow-lg hover:scale-105">Download Brochure</button>
             </div>
             <p class="mt-12 text-[11px] font-mono text-slate-500 font-bold uppercase tracking-[0.3em]">Available for Classes VIII to X</p>
         </div>
-        <!-- Divider at midpoint -->
         <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
     </section>
 
@@ -547,14 +592,37 @@
             </div>
             <div id="projectGrid"></div>
         </div>
-        <!-- Divider at midpoint -->
         <div class="absolute bottom-0 left-0 w-full z-20"><div class="section-divider"></div></div>
     </section>
 
-    <!-- Enquiry Form Section (Initially Hidden) -->
+    <!-- Enquiry Form Section -->
     <section id="enquiry-form" class="py-16 px-6 hidden">
         <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
             <h2 class="text-4xl font-bold mb-6 tracking-tight text-slate-900">Program <span class="gradient-text">Enquiry</span></h2>
+            
+            <!-- NEW: Contact Info Box just above the form -->
+            <div class="pro-card p-6 md:p-8 rounded-3xl mb-8 flex flex-col md:flex-row items-center justify-around gap-6 border-blue-200">
+                <div class="flex items-center gap-4 group">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Email Us</p>
+                        <a href="mailto:arklabs.in@gmail.com" class="text-slate-900 font-bold hover:text-blue-600 transition-colors">arklabs.in@gmail.com</a>
+                    </div>
+                </div>
+                <div class="w-px h-10 bg-slate-200 hidden md:block"></div>
+                <div class="flex items-center gap-4 group">
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 group-hover:bg-green-600 group-hover:text-white transition-all">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">WhatsApp</p>
+                        <a href="https://wa.me/+917050342098" target="_blank" class="text-slate-900 font-bold hover:text-green-600 transition-colors">+91 70503 42098</a>
+                    </div>
+                </div>
+            </div>
+
             <form id="submissionForm" class="pro-card space-y-8 text-left p-12 rounded-[3rem] shadow-2xl transition-transform duration-500 hover:scale-[1.01]">
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="space-y-2">
@@ -599,13 +667,11 @@
         </div>
     </section>
 
-    <!-- Enhanced Glass Footer -->
+    <!-- Footer -->
     <footer class="mt-20 px-6 pb-12">
         <div class="max-w-7xl mx-auto pro-card rounded-[3rem] p-12 md:p-20 overflow-hidden relative">
             <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 blur-[120px]"></div>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
-                <!-- Branding -->
                 <div class="space-y-6">
                     <div class="flex items-center gap-3 group">
                         <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white">
@@ -622,8 +688,6 @@
                         Leading the next generation of engineers through hands-on robotics and experiential learning mentored by IITians.
                     </p>
                 </div>
-
-                <!-- Navigation -->
                 <div>
                     <h4 class="text-slate-900 font-bold mb-6 text-sm uppercase tracking-widest">Navigation</h4>
                     <ul class="space-y-4 text-sm font-semibold text-slate-500">
@@ -633,8 +697,6 @@
                         <li><a href="javascript:revealAndScrollToForm()" class="hover:text-blue-600 transition-colors">Registration</a></li>
                     </ul>
                 </div>
-
-                <!-- Programs -->
                 <div>
                     <h4 class="text-slate-900 font-bold mb-6 text-sm uppercase tracking-widest">Learning Paths</h4>
                     <ul class="space-y-4 text-sm font-semibold text-slate-500">
@@ -644,27 +706,18 @@
                         <li>Faculty Training</li>
                     </ul>
                 </div>
-
-                <!-- Contact -->
                 <div>
                     <h4 class="text-slate-900 font-bold mb-6 text-sm uppercase tracking-widest">Connect</h4>
                     <div class="flex gap-4">
-                        <!-- Email Link with Icon -->
-                        <a href="mailto:arklabs.in@gmail.com" class="w-10 h-10 rounded-full bg-white/50 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white transition-all shadow-sm" title="Email Us">
-                            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
+                        <a href="mailto:arklabs.in@gmail.com" class="w-10 h-10 rounded-full bg-white/50 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white transition-all shadow-sm">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                         </a>
-                        <!-- WhatsApp Link with Icon -->
-                        <a href="https://wa.me/+917050342098" target="_blank" class="w-10 h-10 rounded-full bg-white/50 flex items-center justify-center text-slate-400 hover:text-green-600 hover:bg-white transition-all shadow-sm" title="Chat on WhatsApp">
-                            <svg width="20" height="18" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        <a href="https://wa.me/+917050342098" target="_blank" class="w-10 h-10 rounded-full bg-white/50 flex items-center justify-center text-slate-400 hover:text-green-600 hover:bg-white transition-all shadow-sm">
+                            <svg width="20" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         </a>
                     </div>
                 </div>
             </div>
-
             <div class="mt-16 pt-8 border-t border-white/40 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
                 <p class="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-widest">
                     © 2024 ARK Labs. Managed by IIT Patna Alumni Mentorship Circle.
@@ -678,6 +731,57 @@
     </footer>
 
     <script>
+        // --- SLIDER LOGIC ---
+        let currentSlideIdx = 0;
+        const totalSlides = 4;
+        const sliderTrack = document.getElementById('sliderTrack');
+        const dots = document.querySelectorAll('.slider-dot');
+        let autoSlideInterval;
+
+        function updateSlider() {
+            sliderTrack.style.transform = `translateX(-${currentSlideIdx * 100}%)`;
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlideIdx) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        }
+
+        function nextSlide() {
+            currentSlideIdx = (currentSlideIdx + 1) % totalSlides;
+            updateSlider();
+            resetAutoSlide();
+        }
+
+        function prevSlide() {
+            currentSlideIdx = (currentSlideIdx - 1 + totalSlides) % totalSlides;
+            updateSlider();
+            resetAutoSlide();
+        }
+
+        function goToSlide(idx) {
+            currentSlideIdx = idx;
+            updateSlider();
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                currentSlideIdx = (currentSlideIdx + 1) % totalSlides;
+                updateSlider();
+            }, 4000);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+
+        window.onload = function() {
+            updateSlider();
+            startAutoSlide();
+        };
+
+        // --- PRE-EXISTING LOGIC ---
         const projects = [
             { name: "Obstacle Detect", icon: "sensor", detail: "Uses IR sensors to navigate without collisions." },
             { name: "Water Pump", icon: "motor", detail: "Automated irrigation system using moisture detection." },
@@ -738,10 +842,8 @@
             grid.appendChild(card);
         });
 
-        // Pricing Modal Logic
         function openPricingModal() {
-            const modal = document.getElementById('codeModal');
-            modal.classList.add('show');
+            document.getElementById('codeModal').classList.add('show');
             document.getElementById('schoolCodeInput').value = '';
             document.getElementById('modalErrorMessage').classList.add('hidden');
         }
@@ -752,13 +854,10 @@
 
         function validateSchoolCode() {
             const inputCode = document.getElementById('schoolCodeInput').value;
-            const correctCode = "rhituj.ka.bhosada";
-            const errorMsg = document.getElementById('modalErrorMessage');
-
-            if (inputCode === correctCode) {
+            if (inputCode === "rhituj.ka.bhosada") {
                 window.location.href = '1.html';
             } else {
-                errorMsg.classList.remove('hidden');
+                document.getElementById('modalErrorMessage').classList.remove('hidden');
             }
         }
 
@@ -819,12 +918,9 @@
             });
         });
 
-        // Close modal if user clicks outside the content area
         window.onclick = function(event) {
             const modal = document.getElementById('codeModal');
-            if (event.target == modal) {
-                closePricingModal();
-            }
+            if (event.target == modal) closePricingModal();
         }
     </script>
 </body>
